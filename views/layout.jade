@@ -1,0 +1,46 @@
+doctype html
+html
+    head
+        title= title
+        meta(charset='utf-8')
+        meta(name='keywords', content="个人博客,博客,Carlis")
+        meta(name='description', content="Carlis个人博客")
+        meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
+        link(rel='stylesheet', href='/stylesheets/base.css')
+        link(rel='stylesheet', href='/stylesheets/index.css')
+        link(rel='stylesheet', href='/stylesheets/media.css')
+        <!--[if lt IE 9]>
+        script(src="/javascript/modernizr.js")
+        <![endif]-->
+    body
+        div.ibody
+            header
+                h1= 'Carlis Liu'
+                h2= '影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....'
+                div.logo
+                    a(href='/')
+                nav#topnav
+                    a(href='/')首页
+                    a(href='/about.html')关于我
+                    a(href='/newlist.html')慢生活
+                    a(href='/share.html')模板分享
+                    a(href='/new.html')模板主题
+
+            block content-article
+            block content-aside
+            div.clear
+
+        script.
+            (function () {
+                var menus = document.getElementById('topnav').getElementsByTagName('a'), curr = menus[0], length = menus.length || 0, i = 0;
+                for (; i < length; i++) {
+                    if (window.location.href.indexOf(menus[i].href) > -1) {
+                        curr = menus[i];
+                    }
+                }
+                curr.id = 'topnav_current';
+            })();
+            (function(){
+                // baidu share
+                window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+            })();
