@@ -3,7 +3,7 @@
  */
 
 var config = {
-    db: 'mongodb://127.0.0.1/node_club_dev',
-    db_name: 'node_club_dev'
+    db: 'mongodb://127.0.0.1/carlis_blog_prod',
+    db_name: 'carlis_blog_prod'
 };
 module.exports = config;

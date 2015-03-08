@@ -8,10 +8,13 @@ html
         meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
         block css
             link(rel='stylesheet', href='/stylesheets/base.css')
-            link(rel='stylesheet', href='/stylesheets/index.css')
             link(rel='stylesheet', href='/stylesheets/media.css')
         <!--[if lt IE 9]>
-        script(src="/javascript/modernizr.js")
+        script.
+            (function(){
+                window.location.href = '/upgrade-browser';
+            })();
+        // script(src="/javascript/modernizr.js")
         <![endif]-->
     body
         div.ibody
