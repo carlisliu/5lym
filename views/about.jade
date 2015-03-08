@@ -1,0 +1,30 @@
+extends layout
+append css
+    link(rel='stylesheet', href='/stylesheets/about.css')
+block content-article
+    article
+        h3.about_h 您现在的位置是：
+            a(href='/') 首页
+            | >
+            a(href='/about.html') 关于我
+        div.about
+            h2 Just about me
+            ul
+                p 人生就是一个得与失的过程，而我却是一个幸运者，得到的永远比失去的多。
+            h2 About my blog
+            ul.blog_a
+                p 域  名：www.yangqq.com 创建于2011年01月12日
+block content-aside
+    aside
+        div.avatar
+            a(href='/about.html')
+                span 关于我
+        div.topspaceinfo
+            h1 执子之手，与子偕老
+            p 于千万人之中，我遇见了我所遇见的人....
+        div.about_c
+            p 网名：DanceSmile | 即步非烟
+            p 职业：Web前端设计师、网页设计
+            p
+                a(href='http://list.qq.com/cgi-bin/qf_invite?id=65fb9b3618916f162973471ebc5b97ff786efae0ec9a863e' target='_blank')
+                    img(src='http://rescdn.list.qq.com/zh_CN/htmledition/images/qunfa/manage/picMode_light_m.png' border='0' alt='填写您的邮件地址，订阅我们的精彩内容：')
