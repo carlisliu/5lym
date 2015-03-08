@@ -6,9 +6,10 @@ html
         meta(name='keywords', content="个人博客,博客,Carlis")
         meta(name='description', content="Carlis个人博客")
         meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
-        link(rel='stylesheet', href='/stylesheets/base.css')
-        link(rel='stylesheet', href='/stylesheets/index.css')
-        link(rel='stylesheet', href='/stylesheets/media.css')
+        block css
+            link(rel='stylesheet', href='/stylesheets/base.css')
+            link(rel='stylesheet', href='/stylesheets/index.css')
+            link(rel='stylesheet', href='/stylesheets/media.css')
         <!--[if lt IE 9]>
         script(src="/javascript/modernizr.js")
         <![endif]-->
@@ -20,14 +21,15 @@ html
                 div.logo
                     a(href='/')
                 nav#topnav
-                    a(href='/')首页
-                    a(href='/about.html')关于我
-                    a(href='/newlist.html')慢生活
-                    a(href='/share.html')模板分享
-                    a(href='/new.html')模板主题
+                    a(href='/') 首页
+                    a(href='/newlist.html') 文章
+                    a(href='/share.html') 分享
+                    a(href='/code.html') 代码
+                    a(href='/about.html') 关于我
 
             block content-article
             block content-aside
+            block content
             div.clear
 
         script.
