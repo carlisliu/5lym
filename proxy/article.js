@@ -28,6 +28,8 @@ exports.saveArticle = function (article, callback) {
         instance = new Article()
         instance.title = article.title;
         instance.content = article.content;
+        instance.author_id = article.author_id;
+        instance.category_id = article.category_id;
         instance.save(function (err) {
             if (err) {
                 return callback(err);

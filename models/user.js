@@ -2,8 +2,7 @@
  * Created by Carlis on 3/14/15.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     login_name: {type: String, unique: true},

@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 mongoose.connect('mongodb://root:root@127.0.0.1/carlis_blog_prod');
+var UserProxy = require('./user');
 var ArticleSchema = Schema({
     title: {type: String},
     content: {type: String},
@@ -14,8 +15,8 @@ var ArticleSchema = Schema({
     update_at: {type: Date},
     update_by: { type: ObjectId}
 });
-
-var UserSchema = Schema({
+/*
+var UserSchema =new Schema({
     login_name: {type: String, unique: true},
     name: {type: String, index: true},
     password: {type: String},
@@ -24,15 +25,19 @@ var UserSchema = Schema({
     create_at: {type: Date, default: Date.now}
 });
 
-var User = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);*/
 var Article = mongoose.model('Article', ArticleSchema);
-User.findOne({_id: '5506c2b65ad2b2443be2c66b'}, function (err, user) {
+var param = {login_name: 'carlisliu'};
+/*User.findOne(param, function (err, user) {
     if (err) {
         console.log('error ');
         return  null;
     }
     console.log(user);
-    var article = new Article();
+    console.log('done');
+
+
+    *//*var article = new Article();
     article.title = "first";
     article.content = 'content'
     article.author_id = user._id;
@@ -43,8 +48,12 @@ User.findOne({_id: '5506c2b65ad2b2443be2c66b'}, function (err, user) {
         }
         console.log('saved :');
         console.log(article);
-    });
-})
+    });*//*
+});*/
+UserProxy.getUserById(param, function(err, user){
+    console.log(user);
+    console.log('really done');
+});
 /*
  var userInstance = new User();
  userInstance.login_name = 'carlisliu';

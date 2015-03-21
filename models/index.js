@@ -21,6 +21,6 @@ require('./category');
 
 exports.Article = mongoose.model('Article');
 exports.User = mongoose.model('User');
-exports.User = mongoose.model('Comments');
+exports.Comments = mongoose.model('Comments');
 exports.Share = mongoose.model('Share');
 exports.Category = mongoose.model('Category');
