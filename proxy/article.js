@@ -1,15 +1,30 @@
 var Article = require('../models').Article,
-    //emitter = require('events').EventEmitter,
-    User = require('../models').User;
-
+    User = require('./user'),
+    EventProxy = require('eventproxy');
 
 exports.getAllArticles = function (callback) {
     Article.find(function (err, articles) {
         if (err) {
             return callback(err);
         }
-        //User.find()
-        return callback(null, articles);
+        var proxy = new EventProxy();
+        proxy.assign('user_found', function (users) {
+            var foundUsers = {};
+            if (users && users.length) {
+                users && users.forEach(function (user) {
+                    foundUsers[user.login_name] = user.name;
+                });
+                articles && articles.forEach(function (article, index) {
+                    article.author_id = foundUsers[article.author_id] || '';
+                });
+            }
+            callback(null, articles);
+        });
+        var ids = [];
+        articles.forEach(function (article) {
+            ids.push(article.author_id);
+        });
+        User.getUsersByIds(ids, proxy.done('user_found'));
     });
 };
 

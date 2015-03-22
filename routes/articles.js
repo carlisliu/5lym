@@ -12,11 +12,12 @@ router.get('/', function (req, res, next) {
 });
 
 /* GET article by articleId */
-router.get('/:id([^add])', function (req, res, next) {
-    res.end("Received article's id, but no content yet." + req.params.id);
+router.get('/:id', function (req, res, next) {
+    res.render('article_detail', {article : req.params.id + "Received article's id, but no content yet."});
+    //res.end('article_detail');
 });
 
-router.get('/add', function (req, res, next) {
+router.get('/admin/create', function (req, res, next) {
     res.render('create_article');
 });
 
@@ -31,8 +32,9 @@ router.post('/add', function (req, res, next) {
                 title : title,
                 content : content,
                 category_id : '1',
-                author_id : user._id
+                author_id : user.login_name
             }, function (err, article) {
+                console.log(article);
                 if (err) {
                     res.end('Saved Error: ' + title);
                 }

@@ -11,3 +11,7 @@ exports.getUserById = function (loginName, callback) {
         return callback(null, user);
     });
 };
+
+exports.getUsersByIds = function (ids, callback) {
+    User.where('login_name').in(ids || []).select('login_name name').exec(callback);
+};
