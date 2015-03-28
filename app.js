@@ -12,6 +12,7 @@ var code = require('./routes/code.js');
 var share = require('./routes/share.js');
 var updateBrowser = require('./routes/upgrade.js');
 var articles = require('./routes/articles.js');
+var download = require('./routes/download.js');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/share.html', share);
 app.use('/code.html', code);
 app.use('/upgrade-browser', updateBrowser);
 app.use('/articles', articles);
+app.use('/download/resume', download);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
