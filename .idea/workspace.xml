@@ -53,16 +53,7 @@
       <file leaf-file-name="code.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/code.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="14" selection-start="144" selection-end="144" vertical-scroll-proportion="0.16124469" vertical-offset="0" max-vertical-offset="707">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="23" selection-start="311" selection-end="315" vertical-scroll-proportion="6.964286" vertical-offset="518" max-vertical-offset="1425">
+            <state line="9" column="25" selection-start="226" selection-end="226" vertical-scroll-proportion="0.24186705" vertical-offset="0" max-vertical-offset="707">
               <folding />
             </state>
           </provider>
@@ -81,15 +72,6 @@
         <entry file="file://$PROJECT_DIR$/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state line="1" column="0" selection-start="15" selection-end="83" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="code.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/code.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="46" selection-start="156" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="266">
               <folding />
             </state>
           </provider>
@@ -715,26 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/test-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="7" selection-start="83" selection-end="83" vertical-scroll-proportion="-4.428571" vertical-offset="9" max-vertical-offset="874">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#p#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#0;n#p#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#span#0;n#p#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#3;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#0;n#p#3;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#span#0;n#p#3;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#p#6;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#0;n#p#6;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#span#0;n#p#6;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#1;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#span#1;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/article-detail.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="32" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
@@ -812,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="311" selection-end="315" vertical-scroll-proportion="6.964286" vertical-offset="518" max-vertical-offset="1425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="15" selection-end="83" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
@@ -842,7 +797,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/code.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="144" selection-end="144" vertical-scroll-proportion="0.16124469" vertical-offset="0" max-vertical-offset="707">
+        <state line="9" column="25" selection-start="226" selection-end="226" vertical-scroll-proportion="0.24186705" vertical-offset="0" max-vertical-offset="707">
           <folding />
         </state>
       </provider>
