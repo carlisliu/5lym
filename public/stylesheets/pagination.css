@@ -1,0 +1,8 @@
+.page { margin: 20px 0 0 0; text-align: center; width: 100%; overflow: hidden;}
+.page a { text-decoration: none;}
+.page a b { color: #999;}
+.page > b, .page a { margin: 0 2px; height: 26px; line-height: 26px; border-radius: 50%; width: 26px; text-align: center; display: inline-block}
+.page a { margin: 0 2px; height: 26px; line-height: 26px; border-radius: 50%; width: 26px; text-align: center; display: inline-block}
+/* for IE6 */
+.page > b, .page a:hover { background: #333; color: #FFF;}
+.page a { color: #F33; border: #999 1px solid;}

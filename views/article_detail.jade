@@ -1,8 +1,24 @@
 extends layout
 append css
     link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/stylesheets/article-detail.css')
 block content-article
     article
-        div #{article}
+        div.index_about
+            h2.c_titile #{article.title}
+            p.box_c
+                span.d_time 发布时间： #{article.create_date}
+                span 编辑：
+                    a(href='mailto:carlisliu@qq.com') #{article.author_id}
+            ul.infos
+                p !{article.content}
+            div.keybq
+                p
+                    span 关键字词
+            div.nextinfo
+                p 上一篇：
+                    a(href='/articles') 2014年度优秀个人博客排名公布
+                p 下一篇：
+                    a(href='/articles') 排名公布
 block content-aside
     include side.jade

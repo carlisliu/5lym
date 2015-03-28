@@ -3,7 +3,7 @@ var Article = require('../models').Article,
     EventProxy = require('eventproxy');
 
 exports.getAllArticles = function (callback) {
-    Article.find(function (err, articles) {
+    Article.find().sort({'create_at': -1}).exec(function (err, articles) {
         if (err) {
             return callback(err);
         }

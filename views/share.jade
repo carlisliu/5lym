@@ -1,3 +1,10 @@
 extends layout
+append css
+    link(rel='stylesheet', href='/stylesheets/index.css')
 block content-article
-    div(style='padding-top:100px;') Nothing here...
+    article
+        div
+            h2
+                p Nothing here yet.
+block content-aside
+    include side.jade

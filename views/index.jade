@@ -15,12 +15,17 @@ block content-article
             each articleItem, articleIndex in articles
                 div.blogs
                     h3
-                        a(href='/') #{articleItem.title}
-                    figure
-                        img(src='images/01.jpg')
-                    ul
-                        p #{articleItem.content}
-                        a(href='/' target="_blank" class="readmore") 阅读全文&gt;&gt;
+                        a(href='/articles/#{articleItem._id}',target="_blank", data-artilce-id='#{articleItem._id}') #{articleItem.title}
+                    if articleItem.figure
+                        figure
+                            img(src='#{articleItem.figure}')
+                        ul
+                            p !{articleItem.content}
+                            a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
+                    else
+                        ul(style="width:100%;")
+                            p #{articleItem.content}
+                            a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
                     p.autor
                         span 作者：#{articleItem.author_id}
                         span 分类：【

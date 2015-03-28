@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('code');
+    res.render('code', {title : '代码首页--刘雨萌博客'});
 });
 
 module.exports = router;

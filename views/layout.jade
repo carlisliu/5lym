@@ -25,7 +25,7 @@ html
                     a(href='/')
                 nav#topnav
                     a(href='/') 首页
-                    a(href='/newlist.html', disabled='true') 文章
+                    a(href='/articles.html', disabled='true') 文章
                     a(href='/share.html') 分享
                     a(href='/code.html') 代码
                     a(href='/about.html') 关于我
@@ -37,13 +37,13 @@ html
 
         script.
             (function () {
-                var menus = document.getElementById('topnav').getElementsByTagName('a'), curr = menus[0], length = menus.length || 0, i = 0;
+                var menus = document.getElementById('topnav').getElementsByTagName('a'), curr, length = menus.length || 0, i = 0;
                 for (; i < length; i++) {
-                    if (window.location.href.indexOf(menus[i].href) > -1) {
+                    if (window.location.href.indexOf(menus[i].href) > -1 || (window.location.href + '.html').indexOf(menus[i].href) > -1) {
                         curr = menus[i];
                     }
                 }
-                curr.id = 'topnav_current';
+                curr && (curr.id = 'topnav_current');
             })();
             (function(){
                 // baidu share

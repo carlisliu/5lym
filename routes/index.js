@@ -10,11 +10,20 @@ router.get('/', function (req, res, next) {
         if (err) {
             data.error = '查找文章失败';
         }
-        articles && articles.forEach(function(content, index){
+        // get the latest five articles
+        if (articles && articles.length > 5) {
+            articles = articles.slice(0, 5);
+        }
+        articles && articles.forEach(function (content, index) {
+            if (!index) {
+                articles[index].figure = '/figures/007.jpg';
+            }
+            if (content.content && content.content.length > 400) {
+                articles[index].content = content.content.substring(0, 400) + '...';
+            }
             articles[index].create_date = moment(content.create_at).format('YYYY-MM-DD');
         });
         data.articles = articles;
-        console.log(data);
         res.render('index', data);
     });
 });

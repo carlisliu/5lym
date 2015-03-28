@@ -4,17 +4,21 @@
 var express = require('express'),
     router = express.Router(),
     Article = require('../proxy').Article,
-    User = require('../proxy').User;
+    User = require('../proxy').User,
+    moment = require('moment');
 
 /*Articles Home Page*/
 router.get('/', function (req, res, next) {
-    res.end("Please request with an id.");
+    res.render('article_index', {title : '文章首页--刘雨萌博客'});
 });
 
 /* GET article by articleId */
 router.get('/:id', function (req, res, next) {
-    res.render('article_detail', {article : req.params.id + "Received article's id, but no content yet."});
-    //res.end('article_detail');
+    var articleId = req.params['id'];
+    Article.getArticleById(articleId, function(err, article){
+        article.create_date = moment(article.create_at).format('YYYY-MM-DD');
+        res.render('article_detail', {article :article, title : (article.title || '') + '-刘雨萌博客'});
+    });
 });
 
 router.get('/admin/create', function (req, res, next) {
