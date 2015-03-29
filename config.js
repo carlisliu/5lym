@@ -7,6 +7,10 @@ var config = {
     db: 'mongodb://127.0.0.1/carlis_blog_prod',
     db_name: 'carlis_blog_prod',
     username: 'root',
-    password: 'root'
+    password: 'root',
+    page: {
+        pageSize: 10,
+        paginationSize: 5
+    }
 };
 module.exports = config;

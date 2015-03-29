@@ -28,6 +28,38 @@ exports.getAllArticles = function (callback) {
     });
 };
 
+exports.getArticleCount = function (callback) {
+    Article.count(function (err, count) {
+        if (err) {
+            callback(err, null);
+        }
+        callback(null, count);
+    })
+};
+
+exports.pagination = function (currentPage, pageSize, callback) {
+    Article.find().sort({'create_at': -1}).skip((currentPage - 1) * pageSize).limit(pageSize).exec(function (err, articles) {
+        var proxy = new EventProxy();
+        proxy.assign('user_found', function (users) {
+            var foundUsers = {};
+            if (users && users.length) {
+                users && users.forEach(function (user) {
+                    foundUsers[user.login_name] = user.name;
+                });
+                articles && articles.forEach(function (article, index) {
+                    article.author_id = foundUsers[article.author_id] || '';
+                });
+            }
+            callback(null, articles);
+        });
+        var ids = [];
+        articles.forEach(function (article) {
+            ids.push(article.author_id);
+        });
+        User.getUsersByIds(ids, proxy.done('user_found'));
+    });
+}
+
 exports.getArticleById = function (id, callback) {
     Article.findOne({_id: id}, function (err, article) {
         if (err) {
@@ -40,7 +72,7 @@ exports.getArticleById = function (id, callback) {
 exports.saveArticle = function (article, callback) {
     var instance;
     if (article) {
-        instance = new Article()
+        instance = new Article();
         instance.title = article.title;
         instance.content = article.content;
         instance.author_id = article.author_id;

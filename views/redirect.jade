@@ -1,0 +1,24 @@
+doctype html
+html
+    head
+        title= title
+        meta(charset='utf-8')
+        meta(name='keywords', content="刘雨萌,刘雨萌的博客,Carlis,Carlis个人博客,个人博客,博客")
+        meta(name='description', content="Carlis个人博客")
+        meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
+    body
+        div 模块正在建设中,
+            span#seconds 4
+            | 秒后跳转到首页...
+        script.
+            (function () {
+                var target = document.getElementById('seconds'), seconds = 3, interval;
+                interval = setInterval(function(){
+                    console.log(seconds);
+                    if (seconds) {
+                        target.innerHTML = (seconds--);
+                    } else {
+                        window.location.href = '/';
+                    }
+                }, 1000);
+            })();
