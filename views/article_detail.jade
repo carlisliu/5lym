@@ -16,9 +16,42 @@ block content-article
                 p
                     span 关键字词
             div.nextinfo
-                p 上一篇：
-                    a(href='/articles') 2014年度优秀个人博客排名公布
-                p 下一篇：
-                    a(href='/articles') 排名公布
+
 block content-aside
     include side.jade
+block script-content
+    script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
+    script(type='x/template' id='other-articles' data-comments='for later use,todo').
+        <p>
+            上一篇：<a href='/articles.html'>我们的愿景</a>
+        </p>
+        <p>
+            下一篇：<a href='/articles.html'>2014排行榜</a>
+        </p>
+    script.
+        (function(){
+            seajs.config({
+                base: '/javascripts/sea-modules/',
+                alias: {
+                    'jquery': 'jquery/jquery/1.10.1/jquery.js'
+                }
+            });
+            seajs.use('jquery', function($){
+                $(function(){
+                    $.getJSON('/articles/get/adjacent.html', {id: '#{article._id}'}, function(data){
+                        var html = '';
+                        if (data) {
+                            if (data.pre) {
+                                html += '<p>上一篇：<a href="' + (data.pre.link || '/') + '">' + (data.pre.title || '') + '</a></p>'
+                            }
+                            if (data.next) {
+                                html += '<p>下一篇：<a href="' + (data.next.link || '/') + '">' + (data.next.title || '') + '</a></p>'
+                            }
+                        }
+                        if (html) {
+                            $('.nextinfo').html(html);
+                        }
+                    });
+                });
+            });
+        })();

@@ -85,3 +85,28 @@ exports.saveArticle = function (article, callback) {
         });
     }
 }
+
+exports.getAdjacentArticles = function (date, callback) {
+    if (!date) {
+        return callback(null, null, null);
+    }
+    var proxy = new EventProxy();
+    proxy.assign('pre_found', 'after_found', function (pre, after) {
+        callback(null, pre, after);
+    });
+
+    Article.find({'create_at': {'$lt': date}}).sort({'create_at': -1}).exec(function (err, articles) {
+        var data = null, article = null;
+        if (articles && (article = articles[0])) {
+            data = {'link': '/articles/' + article._id, 'title': article.title};
+        }
+        proxy.done('pre_found')(null, data);
+    });
+    Article.find({'create_at': {'$gt': date}}).sort({'create_at': 1}).exec(function (err, articles) {
+        var data = null, article = null;
+        if (articles && (article = articles[0])) {
+            data = {'link': '/articles/' + article._id, 'title': article.title};
+        }
+        proxy.done('after_found')(null, data);
+    });
+};

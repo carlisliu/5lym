@@ -90,6 +90,31 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+router.get('/get/adjacent.html', function (req, res, next) {
+    var articleId = req.query['id'];
+    if (!articleId) {
+        res.json({'test': 'Carlis Liu'});
+        return;
+    }
+    Article.getArticleById(articleId, function (err, article) {
+        if (err) {
+            res.json(null);
+        } else {
+            var date = article.create_at;
+            Article.getAdjacentArticles(date, function (err, preOne, nextOne) {
+                var data = {};
+                if (preOne) {
+                    data.pre = preOne;
+                }
+                if (nextOne) {
+                    data.next = nextOne;
+                }
+                res.json(data);
+            });
+        }
+    });
+});
+
 router.get('/admin/create', function (req, res, next) {
     res.render('create_article');
 });
