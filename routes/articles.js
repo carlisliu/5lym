@@ -5,6 +5,7 @@ var express = require('express'),
     router = express.Router(),
     Article = require('../proxy').Article,
     User = require('../proxy').User,
+    Category = require('../proxy').Category,
     moment = require('moment'),
     config = require('../config');
 
@@ -74,7 +75,17 @@ router.get('/', function (req, res, next) {
                     }
                     return result;
                 }(currentPage, pageSize, paginationSize, data.totalPageRecord);
-                res.render('article_index', data);
+                Category.findAllCategories(function (err, categories) {
+                    var categoryMap = {};
+                    categories.forEach(function (content) {
+                        categoryMap[content.category_id] = content.category_name;
+                    });
+                    var articles = data.articles || [];
+                    articles.forEach(function (content, index) {
+                        content.category_name = categoryMap[content.category_id] || '未分类';
+                    });
+                    res.render('article_index', data);
+                });
             }
         });
     });
@@ -85,6 +96,13 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     var articleId = req.params['id'];
     Article.getArticleById(articleId, function (err, article) {
+        Article.updateReviewTimes(article, function (err, updArticle) {
+            if (err) {
+                console.log("error occurs when update article's review times.");
+            } else {
+                console.log('article has been updated, review times is ' + updArticle.review_times);
+            }
+        });
         article.create_date = moment(article.create_at).format('YYYY-MM-DD');
         res.render('article_detail', {article: article, title: (article.title || '') + '-刘雨萌博客'});
     });

@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET about page. */
 router.get('/', function(req, res, next) {
-    res.render('about', { title: 'Carlis个人博客' });
+    res.render('about', { title: 'Carlis个人博客' ,'contactInfo' : '/images/contact-info.png'});
 });
 
 module.exports = router;

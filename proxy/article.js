@@ -1,5 +1,6 @@
 var Article = require('../models').Article,
     User = require('./user'),
+    Category = require('./category'),
     EventProxy = require('eventproxy');
 
 exports.getAllArticles = function (callback) {
@@ -8,16 +9,22 @@ exports.getAllArticles = function (callback) {
             return callback(err);
         }
         var proxy = new EventProxy();
-        proxy.assign('user_found', function (users) {
-            var foundUsers = {};
+        proxy.assign('user_found', 'category_found', function (users, categories) {
+            var foundUsers = {}, foundCategories = {};
             if (users && users.length) {
-                users && users.forEach(function (user) {
+                users.forEach(function (user) {
                     foundUsers[user.login_name] = user.name;
                 });
-                articles && articles.forEach(function (article, index) {
-                    article.author_id = foundUsers[article.author_id] || '';
+            }
+            if (categories && categories.length) {
+                categories.forEach(function (content) {
+                    foundCategories[content.category_id] = content.category_name;
                 });
             }
+            articles && articles.forEach(function (article) {
+                article.author_id = foundUsers[article.author_id] || '';
+                article.category_name = foundCategories[article.category_id] || '未分类';
+            });
             callback(null, articles);
         });
         var ids = [];
@@ -25,6 +32,7 @@ exports.getAllArticles = function (callback) {
             ids.push(article.author_id);
         });
         User.getUsersByIds(ids, proxy.done('user_found'));
+        Category.findAllCategories(proxy.done('category_found'));
     });
 };
 
@@ -108,5 +116,23 @@ exports.getAdjacentArticles = function (date, callback) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
         proxy.done('after_found')(null, data);
+    });
+};
+
+exports.updateReviewTimes = function (article, callback) {
+    if (!article) {
+        return  article(null, article);
+    }
+    article.review_times = (article.review_times || 0) + 1;
+    article.update_at = new Date();
+    var updateProperty = {
+        review_times: article.review_times,
+        update_at: article.update_at
+    }
+    Article.update({_id: article._id}, {$set: updateProperty}, function (err) {
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, article);
     });
 };

@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
     title: {type: String},
     content: {type: String},
+    review_times: {type: Number, default: 0},
     category_id: {type: String},
     author_id: { type: String},
     create_at: {type: Date, default: Date.now},
