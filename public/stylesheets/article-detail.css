@@ -1,5 +1,5 @@
 @charset "utf-8";
-.index_about { float: left; width: 740px; overflow: hidden; background: url(../images/r_line.jpg) repeat-y right; margin: 10px 0 }
+.index_about { float: left; width: 100%; overflow: hidden; background: url(../images/r_line.jpg) repeat-y right; margin: 10px 0 }
 .c_titile { font-size: 22px; margin: 20px 0; text-align: center;color: #333; }
 .box_c { border: #ccc 1px dashed; text-align: center; padding: 5px 0; margin-right: 30px;color: #999;}
 .box_c span { margin: 0 10px; }
