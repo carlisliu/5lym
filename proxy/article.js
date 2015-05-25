@@ -121,7 +121,7 @@ exports.getAdjacentArticles = function (date, callback) {
 
 exports.updateReviewTimes = function (article, callback) {
     if (!article) {
-        return  article(null, article);
+        return  callback(null, article);
     }
     article.review_times = (article.review_times || 0) + 1;
     article.update_at = new Date();
@@ -136,3 +136,13 @@ exports.updateReviewTimes = function (article, callback) {
         callback(null, article);
     });
 };
+
+exports.findLatestArticles = function (callback) {
+    // Latest article list at home page limits its size to 8.
+    Article.find().sort({'create_at': 1}).limit(8).exec(callback);
+}
+
+exports.findRecommendArticles = function (callback) {
+    // Same as latest articles.
+    Article.find().sort({'create_at': 1}).limit(8).exec(callback);
+}

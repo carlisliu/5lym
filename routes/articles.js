@@ -106,7 +106,7 @@ router.get('/:id', function (req, res, next) {
             }
         });
         article.create_date = moment(article.create_at).format('YYYY-MM-DD');
-        res.render('article_detail', {article: article, title: (article.title || '') + '-刘雨萌博客'});
+        res.render('article_detail', {article: article, title: (article.title || '') + '-刘雨萌博客', me: Common.getCommonData().me});
     });
 });
 
@@ -162,6 +162,34 @@ router.post('/add', function (req, res, next) {
     } else {
         res.redirect('/articles/add?err=no%20data');
     }
+});
+
+router.get('/get/latest.html', function (req, res, next) {
+    Article.findLatestArticles(function (error, articles) {
+        var data = {};
+        if (error) {
+            data.status = 'error';
+            //data.msg = error.toString();
+        } else {
+            data.status = 'success';
+            data.articles = articles;
+        }
+        res.json(data);
+    })
+});
+
+router.get('/get/recommend.html', function (req, res, next) {
+    Article.findRecommendArticles(function (error, articles) {
+        var data = {};
+        if (error) {
+            data.status = 'error';
+            //data.msg = error.toString();
+        } else {
+            data.status = 'success';
+            data.articles = articles;
+        }
+        res.json(data);
+    })
 });
 
 module.exports = router;

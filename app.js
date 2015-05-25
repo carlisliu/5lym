@@ -14,6 +14,7 @@ var updateBrowser = require('./routes/upgrade.js');
 var articles = require('./routes/articles.js');
 var download = require('./routes/download.js');
 var birthday = require('./routes/birthday.js');
+var Common = require('./proxy').Common;
 
 var app = express();
 
@@ -28,6 +29,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(function(req, res, next){
+    res.me = Common.getCommonData().me;
+    next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
