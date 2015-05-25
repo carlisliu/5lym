@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Article = require('../proxy').Article;
 var moment = require('moment');
+var Common = require('../proxy').Common;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -24,6 +25,7 @@ router.get('/', function (req, res, next) {
             articles[index].create_date = moment(content.create_at).format('YYYY-MM-DD');
         });
         data.articles = articles;
+        data.me = Common.getCommonData().me;
         res.render('index', data);
     });
 });

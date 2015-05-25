@@ -7,7 +7,8 @@ var express = require('express'),
     User = require('../proxy').User,
     Category = require('../proxy').Category,
     moment = require('moment'),
-    config = require('../config');
+    config = require('../config'),
+    Common = require('../proxy').Common;
 
 /*Articles Home Page*/
 router.get('/', function (req, res, next) {
@@ -84,6 +85,7 @@ router.get('/', function (req, res, next) {
                     articles.forEach(function (content, index) {
                         content.category_name = categoryMap[content.category_id] || '未分类';
                     });
+                    data.me = Common.getCommonData().me;
                     res.render('article_index', data);
                 });
             }

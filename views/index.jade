@@ -37,3 +37,16 @@ block content-article
                     div.dateview #{articleItem.create_date}
 block content-aside
     include side.jade
+block script-content
+    script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
+    script.
+        (function(){
+            seajs.config({
+                base: '/javascripts/',
+                alias: {
+                    'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js'
+                }
+            });
+
+            seajs.use('static/article/article');
+        })();
