@@ -1,23 +1,59 @@
 //
    Created by Carlis on 5/26/15.
 extends layout
+append css
+    link(rel='stylesheet', href='/stylesheets/admin/style.css')
+    link(rel='stylesheet', href='/stylesheets/admin/form-style.css')
 block content-main
     div.closed(aria-hidden='false',style='position: relative;',id='nav',role='navigation')
         ul
             li.active
-                a(href='#') Home
+                a(href='#category') Category
             li
-                a(href='#') About
+                a(href='#article') Articles
             li
-                a(href='#') Projects
-            li
-                a(href='#') Blog
+                a(href='#project') Projects
     div.main(role='main')
         a(href='#nav', id='toggle',aria-hidden='true') Menu
+        div.content
+            div.row-fluid
+                div.col-xs-12
+                    div.box
+                        div.box-head
+                            h3='Category'
+                        div.box-content
+                            div.alert.alert-info.alert-block
+                                a.close(data-dismiss='alert',href='#') x
+                                h4.alert-heading Information!
+                                | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                            form(action='#')
+                                div.form-group
+                                    label.control-label.label-size(for='category-name') Category
+                                    input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter category")
+                                div.form-group
+                                    label.control-label.label-size(for='category-memo') Memo
+                                    input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter category")
+                                button.btn.btn-default Save
+                                div.table-holder
+                                    table.table.table-bordered
+                                        thead
+                                            tr
+                                                th #
+                                                th #
+                                                th #
+                                                th #
+                                        tbody
+                                            tr
+                                                td 1
+                                                td 1
+                                                td 1
+                                                td 1
 block script-content
     script.
-        (function(){
-            seajs.use('responsive', function(responsiveNav){
+        seajs.use(['bootstrap', 'responsive'], function($, responsiveNav){
+            $(function(){
                 var navigation = responsiveNav("#nav", {customToggle: "#toggle"});
+                $('#nav').on('click', 'ul li a', function(e){
+                });
             });
-        })();
+        });

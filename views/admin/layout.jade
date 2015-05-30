@@ -9,6 +9,7 @@ html
         meta(name='description', content="Carlis个人博客")
         meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
         block css
+            link(rel='stylesheet', href='http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css')
             link(rel='stylesheet', href='/stylesheets/responsive/1.0.39/responsive-nav.css')
         <!--[if lt IE 9]>
         script.
@@ -23,7 +24,9 @@ html
                     base: '/javascripts/',
                     alias: {
                         'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js',
-                        'responsive': 'admin/responsive/1.0.39/responsive-nav.min.js'
+                        'responsive': 'admin/responsive/1.0.39/responsive-nav.min.js',
+                        //'bootstrap': 'http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js'
+                        'bootstrap': 'sea-modules/bootstrap/3.3.4/bootstrap.js'
                     }
                 });
                 golbal.seajs = seajs;
