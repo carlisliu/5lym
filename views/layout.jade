@@ -15,6 +15,17 @@ html
                 window.location.href = '/upgrade-browser';
             })();
         <![endif]-->
+        script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
+        script.
+            (function(golbal, undefined){
+                seajs.config({
+                    base: '/javascripts/',
+                    alias: {
+                        'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js'
+                    }
+                });
+                golbal.seajs = seajs;
+            })(window);
     body
         div.ibody
             header
@@ -28,12 +39,10 @@ html
                     a(href='/share.html') 分享
                     a(href='/code.html') 代码
                     a(href='/about.html') 关于我
-
             block content-article
             block content-aside
             block content
             div.clear
-        block script-content
         script.
             (function () {
                 var menus = document.getElementById('topnav').getElementsByTagName('a'), curr, length = menus.length || 0, i = 0;
@@ -48,3 +57,4 @@ html
                 // baidu share
                 window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
             })();
+        block script-content

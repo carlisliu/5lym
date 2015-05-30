@@ -3,13 +3,12 @@
  */
 var express = require('express'),
     router = express.Router(),
-    fs = require('fs'),
-    path = require('path');
+    fs = require('fs');
 
-router.get('/', function (req, res, next) {
-    res.setHeader('Content-disposition', 'attachment; filename=' + 'resume.xls');
+router.get('/', function (req, res) {
+    res.setHeader('Content-disposition', 'attachment; filename=' + 'resume.pdf');
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    fs.createReadStream('./resume/resume.pdf').on('error', function(err){
+    fs.createReadStream('./resume/resume.pdf').on('error',function (err) {
         console.log('error', err);
         res.end('no file available');
     }).pipe(res);

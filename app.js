@@ -4,17 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index.js');
-var users = require('./routes/users.js');
-var about = require('./routes/about.js');
-var code = require('./routes/code.js');
-var share = require('./routes/share.js');
-var updateBrowser = require('./routes/upgrade.js');
-var articles = require('./routes/articles.js');
-var download = require('./routes/download.js');
-var birthday = require('./routes/birthday.js');
-var Common = require('./proxy').Common;
+var routes = require('./routes');
+var adminRoutes = require('./admin-routes');
 
 var app = express();
 
@@ -22,7 +13,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+// favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,22 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(function(req, res, next){
-    res.me = Common.getCommonData().me;
-    next();
-});
-
-app.use('/', routes);
-app.use('/users', users);
-app.use('/about.html', about);
-app.use('/articles.html', articles);
-app.use('/share.html', share);
-app.use('/code.html', code);
-app.use('/upgrade-browser', updateBrowser);
-app.use('/articles', articles);
-app.use('/download/resume', download);
-app.use('/happy-birthday-to-:format?', birthday);
+//routes
+routes(app);
+adminRoutes(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

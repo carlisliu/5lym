@@ -1,0 +1,23 @@
+//
+   Created by Carlis on 5/26/15.
+extends layout
+block content-main
+    div.closed(aria-hidden='false',style='position: relative;',id='nav',role='navigation')
+        ul
+            li.active
+                a(href='#') Home
+            li
+                a(href='#') About
+            li
+                a(href='#') Projects
+            li
+                a(href='#') Blog
+    div.main(role='main')
+        a(href='#nav', id='toggle',aria-hidden='true') Menu
+block script-content
+    script.
+        (function(){
+            seajs.use('responsive', function(responsiveNav){
+                var navigation = responsiveNav("#nav", {customToggle: "#toggle"});
+            });
+        })();
