@@ -12,48 +12,171 @@ block content-main
             li
                 a(href='#article') Articles
             li
-                a(href='#project') Projects
+                a(href='#share') Share
     div.main(role='main')
         a(href='#nav', id='toggle',aria-hidden='true') Menu
         div.content
-            div.row-fluid
-                div.col-xs-12
-                    div.box
-                        div.box-head
-                            h3='Category'
-                        div.box-content
-                            div.alert.alert-info.alert-block
-                                a.close(data-dismiss='alert',href='#') x
-                                h4.alert-heading Information!
-                                | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
-                            form(action='#')
-                                div.form-group
-                                    label.control-label.label-size(for='category-name') Category
-                                    input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter category")
-                                div.form-group
-                                    label.control-label.label-size(for='category-memo') Memo
-                                    input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter category")
-                                button.btn.btn-default Save
-                                div.table-holder
-                                    table.table.table-bordered
-                                        thead
-                                            tr
-                                                th #
-                                                th #
-                                                th #
-                                                th #
-                                        tbody
-                                            tr
-                                                td 1
-                                                td 1
-                                                td 1
-                                                td 1
+            div.col-xs-12(id='category')
+                div.box
+                    div.box-head
+                        h3='Category'
+                    div.box-content
+                        div.alert.alert-info.alert-block
+                            a.close(data-dismiss='alert',href='#') x
+                            h4.alert-heading Information!
+                            | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                        form(action='#')
+                            div.form-group
+                                label.control-label.label-size(for='category-name') Category
+                                input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter category")
+                            div.form-group
+                                label.control-label.label-size(for='category-memo') Memo
+                                input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter memo")
+                            button.btn.btn-default Save
+                            div.table-holder
+                                table.table.table-bordered
+                                    thead
+                                        tr
+                                            th #
+                                            th #
+                                            th #
+                                            th Action
+                                    tbody
+                                        tr
+                                            td 1
+                                            td 1
+                                            td 1
+                                            td(width='20%')
+                                                div.btn-group.btn-group-xs
+                                                    button.btn.btn-default(type='button') Edit
+                                                    button.btn.btn-danger(type='button') Remove
+                                nav
+                                    ul.pagination
+                                        li
+                                            a(href='#',aria-label='Previous')
+                                                span(aria-hidden='true') &laquo;
+                                        li
+                                            a(href='#') 1
+                                        li
+                                            a(href='#') 2
+                                        li
+                                            a(href='#') 3
+                                        li
+                                            a(href='#') 4
+                                        li
+                                            a(href='#',aria-label='Next')
+                                                span(aria-hidden='true') &raquo;
+            div.col-xs-12(id='article')
+                div.box
+                    div.box-head
+                        h3='Articles'
+                    div.box-content
+                        div.alert.alert-info.alert-block
+                            a.close(data-dismiss='alert',href='#') x
+                            h4.alert-heading Information!
+                            | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                        form(action='#')
+                            div.form-group
+                                label.control-label.label-size(for='category-name') Title
+                                input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter title")
+                            div.form-group
+                                label.control-label.label-size(for='category-memo') Author
+                                input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter author")
+                            button.btn.btn-default Save
+                            div.table-holder
+                                table.table.table-bordered
+                                    thead
+                                        tr
+                                            th #
+                                            th #
+                                            th #
+                                            th Action
+                                    tbody
+                                        tr
+                                            td 1
+                                            td 1
+                                            td 1
+                                            td(width='20%')
+                                                div.btn-group.btn-group-xs
+                                                    button.btn.btn-default(type='button') Edit
+                                                    button.btn.btn-primary(type='button') Publish
+                                                    button.btn.btn-danger(type='button') Remove
+                                nav
+                                    ul.pagination
+                                        li
+                                            a(href='#',aria-label='Previous')
+                                                span(aria-hidden='true') &laquo;
+                                        li
+                                            a(href='#') 1
+                                        li
+                                            a(href='#') 2
+                                        li
+                                            a(href='#') 3
+                                        li
+                                            a(href='#') 4
+                                        li
+                                            a(href='#',aria-label='Next')
+                                                span(aria-hidden='true') &raquo;
+            div.col-xs-12(id='share')
+                div.box
+                    div.box-head
+                        h3='Share'
+                    div.box-content
+                        div.alert.alert-info.alert-block
+                            a.close(data-dismiss='alert',href='#') x
+                            h4.alert-heading Information!
+                            | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                        form(action='#')
+                            div.form-group
+                                label.control-label.label-size(for='category-name') Title
+                                input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter title")
+                            div.form-group
+                                label.control-label.label-size(for='category-memo') Link
+                                input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter link")
+                            button.btn.btn-default Save
+                            div.table-holder
+                                table.table.table-bordered
+                                    thead
+                                        tr
+                                            th #
+                                            th #
+                                            th #
+                                            th Action
+                                    tbody
+                                        tr
+                                            td 1
+                                            td 1
+                                            td 1
+                                            td(width='20%')
+                                                div.btn-group.btn-group-xs
+                                                    button.btn.btn-default(type='button') Edit
+                                                    button.btn.btn-primary(type='button') Publish
+                                                    button.btn.btn-danger(type='button') Remove
+                                nav
+                                    ul.pagination
+                                        li
+                                            a(href='#',aria-label='Previous')
+                                                span(aria-hidden='true') &laquo;
+                                        li
+                                            a(href='#') 1
+                                        li
+                                            a(href='#') 2
+                                        li
+                                            a(href='#') 3
+                                        li
+                                            a(href='#') 4
+                                        li
+                                            a(href='#',aria-label='Next')
+                                                span(aria-hidden='true') &raquo;
 block script-content
     script.
         seajs.use(['bootstrap', 'responsive'], function($, responsiveNav){
             $(function(){
                 var navigation = responsiveNav("#nav", {customToggle: "#toggle"});
                 $('#nav').on('click', 'ul li a', function(e){
+                    var $thisParent = $(this).parent();
+                    $thisParent.addClass('active');
+                    $thisParent.siblings().removeClass('active');
                 });
             });
         });
