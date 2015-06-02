@@ -18,12 +18,12 @@ exports.getAllArticles = function (callback) {
             }
             if (categories && categories.length) {
                 categories.forEach(function (content) {
-                    foundCategories[content.category_id] = content.category_name;
+                    foundCategories[content.category_id] = content.name;
                 });
             }
             articles && articles.forEach(function (article) {
                 article.author_id = foundUsers[article.author_id] || '';
-                article.category_name = foundCategories[article.category_id] || '未分类';
+                article.name = foundCategories[article.category_id] || '未分类';
             });
             callback(null, articles);
         });

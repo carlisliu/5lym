@@ -79,11 +79,11 @@ router.get('/', function (req, res, next) {
                 Category.findAllCategories(function (err, categories) {
                     var categoryMap = {};
                     categories.forEach(function (content) {
-                        categoryMap[content.category_id] = content.category_name;
+                        categoryMap[content.category_id] = content.name;
                     });
                     var articles = data.articles || [];
                     articles.forEach(function (content, index) {
-                        content.category_name = categoryMap[content.category_id] || '未分类';
+                        content.name = categoryMap[content.category_id] || '未分类';
                     });
                     data.me = Common.getCommonData().me;
                     res.render('article_index', data);

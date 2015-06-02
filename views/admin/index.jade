@@ -174,9 +174,7 @@ block script-content
             $(function(){
                 var navigation = responsiveNav("#nav", {customToggle: "#toggle"});
                 $('#nav').on('click', 'ul li a', function(e){
-                    var $thisParent = $(this).parent();
-                    $thisParent.addClass('active');
-                    $thisParent.siblings().removeClass('active');
+                    $(this).parent().addClass('active').siblings().removeClass('active');
                 });
             });
         });
