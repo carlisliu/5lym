@@ -26,7 +26,7 @@
       <file leaf-file-name="category.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/static/admin/category/category.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="13" selection-start="986" selection-end="986" vertical-scroll-proportion="0.7222222" vertical-offset="0" max-vertical-offset="874">
+            <state line="22" column="34" selection-start="753" selection-end="753" vertical-scroll-proportion="0.3888889" vertical-offset="114" max-vertical-offset="874">
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -1041,7 +1041,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/static/admin/category/category.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="986" selection-end="986" vertical-scroll-proportion="0.7222222" vertical-offset="0" max-vertical-offset="874">
+        <state line="22" column="34" selection-start="753" selection-end="753" vertical-scroll-proportion="0.3888889" vertical-offset="114" max-vertical-offset="874">
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>

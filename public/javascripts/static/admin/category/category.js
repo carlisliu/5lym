@@ -11,12 +11,12 @@ define(function (require, exports, module) {
         this.elements = this.container.find('input[type="text"]');
     }
 
-    Category.fn = Category.prototype = {
+    Category.prototype = {
         constructor: Category,
         saveOrUpdate: function (category) {
             var that;
             if (!category.name) {
-                console.log("Category's name is empty.");
+                tip.showError("Category's name is empty.");
             } else {
                 that = this;
                 $.post('/admin/category/addOrUpdate.html', {category: category}).done(function (data) {
