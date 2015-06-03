@@ -10,9 +10,9 @@ define(function (require, exports, module) {
     }
 
     Tip.LEVEL = {
-        INFO: 'info',
-        ERROR: 'error',
-        SUCCESS: 'success'
+        info: 'info',
+        error: 'error',
+        success: 'success'
     };
     //show(level, msg)
     //show(level, msg, callback)
@@ -31,8 +31,8 @@ define(function (require, exports, module) {
         }
     };
 
-    $(Tip.LEVEL).each(function (key, value) {
-        var level = key.charAt(0).toUpperCase() + key.slice(1);
+    $.each(Tip.LEVEL, function (key, value) {
+        var level = key.charAt(0).toUpperCase() + key.substring(1);
         Tip.prototype['show' + level] = function (msg, callback, autoHide) {
             this.show(value, msg, callback, autoHide);
             return this;

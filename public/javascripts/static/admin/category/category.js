@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
         Tip = require('../common/tips'),
-        tip = new Tip('#tip-container');
+        tip = new Tip('#category-tip-container');
 
     function Category(container) {
         this.container = $(container);

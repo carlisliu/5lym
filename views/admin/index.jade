@@ -21,18 +21,18 @@ block content-main
                     div.box-head
                         h3='Category'
                     div.box-content
-                        div.alert.alert-info.alert-block
+                        div.alert.alert-info.alert-block(id='category-tip-container')
                             a.close(data-dismiss='alert',href='#') x
                             h4.alert-heading Information!
                             | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
-                        form(action='#')
+                        form(action='#', id='category-form')
                             div.form-group
                                 label.control-label.label-size(for='category-name') Category
-                                input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter category")
+                                input.form-control(type='text',name='category-name',id='category-name', data-key= 'name',placeholder="Enter category")
                             div.form-group
                                 label.control-label.label-size(for='category-memo') Memo
-                                input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter memo")
-                            button.btn.btn-default Save
+                                input.form-control(type='text',name='category-memo',id='category-memo',data-key= 'memo',placeholder="Enter memo")
+                            button.btn.btn-default(id='category-save') Save
                             div.table-holder
                                 table.table.table-bordered
                                     thead
@@ -178,3 +178,4 @@ block script-content
                 });
             });
         });
+        seajs.use('/javascripts/static/admin/category/event');
