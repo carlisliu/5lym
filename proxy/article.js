@@ -18,7 +18,7 @@ exports.getAllArticles = function (callback) {
             }
             if (categories && categories.length) {
                 categories.forEach(function (content) {
-                    foundCategories[content.category_id] = content.name;
+                    foundCategories[content._id] = content.name;
                 });
             }
             articles && articles.forEach(function (article) {

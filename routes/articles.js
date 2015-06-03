@@ -79,7 +79,7 @@ router.get('/', function (req, res, next) {
                 Category.findAllCategories(function (err, categories) {
                     var categoryMap = {};
                     categories.forEach(function (content) {
-                        categoryMap[content.category_id] = content.name;
+                        categoryMap[content._id] = content.name;
                     });
                     var articles = data.articles || [];
                     articles.forEach(function (content, index) {
@@ -98,6 +98,9 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     var articleId = req.params['id'];
     Article.getArticleById(articleId, function (err, article) {
+        if (!article) {
+            next();
+        }
         Article.updateReviewTimes(article, function (err, updArticle) {
             if (err) {
                 console.log("error occurs when update article's review times.");

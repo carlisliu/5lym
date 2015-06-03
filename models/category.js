@@ -5,8 +5,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
-    category_id: {type: String},
-    name: {type: String},
+    name: {type: String, unique: true, index: true},
     memo: {type: String},
     create_at: {type: Date, default: Date.now}
 });
