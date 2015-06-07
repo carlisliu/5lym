@@ -19,18 +19,25 @@ define(function (require, exports, module) {
                 tip.showError("Category's name is empty.");
             } else {
                 that = this;
-                $.post('/admin/category/addOrUpdate.html', {category: category}).done(function (data) {
-                    if (data.status === 'success') {
-                        that.success(data.category);
-                    }
-                }).fail(function (e) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/category/addOrUpdate.html",
+                    dataType: 'json',
+                    data: {category: category}
+                }).done(function (data) {
+                        if (data.status === 'success') {
+                            console.log('success');
+                            that.success(data.category);
+                        }
+                    }).fail(function (e) {
+                        console.error(e);
                         that.fail('Error occurs');
                     });
             }
             return this;
         },
         success: function (category) {
-            tip.showSuccess('Saved.')
+            tip.showSuccess('Saved.');
             this.elements.val('');
             return this;
         },

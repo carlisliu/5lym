@@ -11,6 +11,8 @@ var config = {
     page: {
         pageSize: 10,
         paginationSize: 5
-    }
+    },
+    title: "Carlis Liu's blog",
+    catchphrase: 'Chance favors only the prepared mind'
 };
 module.exports = config;

@@ -11,12 +11,15 @@ router.get('/', function (req, res) {
 
 router.post('/addOrUpdate.html', function (req, res) {
     var category = req.body['category'];
+    console.log(category);
     if (category && category.name) {
         Category.getCategoryByName(category.name, function (err, content) {
             var data = {};
             if (err) {
                 data.status = 'error';
                 data.msg = err.toString();
+
+                res.json(data);
             } else {
                 if (content) {
                     content.name = category.name;
