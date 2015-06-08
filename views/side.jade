@@ -3,8 +3,7 @@ aside
         a(href='/about.html')
             span 关于我
     div.topspaceinfo
-        h1= '执子之手，与子偕老'
-        p 于千万人之中，我遇见了我所遇见的人....
+
     div.about_c
         p 名字：#{me.zh.alias || 'Carlis'}
         p 职业：#{me.zh.occupation || '项目经理、软件工程师'}
@@ -41,4 +40,5 @@ block content-aside
     script.
         (function(){
             seajs.use('static/article/event');
+            seajs.use('static/tag/event');
         })();
