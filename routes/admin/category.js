@@ -5,38 +5,38 @@ var express = require('express'),
     router = express.Router(),
     Category = require('../../proxy').Category;
 
-router.get('/', function (req, res) {
-    res.render('about', { title: 'Carlis个人博客', 'contactInfo': '/images/contact-info.png'});
-});
-
 router.post('/addOrUpdate.html', function (req, res) {
     var category = req.body['category'];
-    console.log(category);
     if (category && category.name) {
         Category.getCategoryByName(category.name, function (err, content) {
-            var data = {};
-            if (err) {
-                data.status = 'error';
-                data.msg = err.toString();
-
-                res.json(data);
-            } else {
+            res.encased(err, res, function (data) {
                 if (content) {
                     content.name = category.name;
                     content.memo = category.memo;
                 } else {
                     content = category;
                 }
-                data.status = 'success';
                 data.category = content;
                 Category.saveOrUpdate(content, function (err) {
-                    res.json(data);
+                    res.encased(err, res, function (data) {
+                        res.json(data);
+                    });
                 });
-            }
+            });
         });
     } else {
         res.json({status: 'error', msg: 'Category content is empty'});
     }
+});
+
+router.get('/find.html', function (req, res) {
+    var currentPage = req.query.current || 1, pageSize = req.query.size || 10;
+    Category.findCategoriesByPagination(parseInt(currentPage), parseInt(pageSize), function (err, categories) {
+        res.encased(err, res, function (data) {
+            data.category = categories;
+            res.json(data);
+        });
+    });
 });
 
 module.exports = router;

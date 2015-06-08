@@ -7,8 +7,21 @@ html
         meta(name='description', content="Carlis个人博客")
         meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
         block css
-            link(rel='stylesheet', href='/stylesheets/base.css')
-            link(rel='stylesheet', href='/stylesheets/media.css')
+            link(rel='stylesheet', href='/stylesheets/base.css', type='text/css')
+            link(rel='stylesheet', href='/stylesheets/media.css', type='text/css')
+        style.
+            footer {
+                text-align: center;
+                line-height: 40px;
+                border-top: #E8E8E8 1px solid;
+                width: 100%;
+                margin: auto;
+            }
+            footer a {
+                color: #CCC;
+                word-spacing: 3px;
+                zoom: 1;
+            }
         <!--[if lt IE 9]>
         script.
             (function(){
@@ -43,6 +56,9 @@ html
             block content-aside
             block content
             div.clear
+        footer
+            p
+                a(href='http://www.miitbeian.gov.cn/', target='_blank') 京ICP备15029116号
         script.
             (function () {
                 var menus = document.getElementById('topnav').getElementsByTagName('a'), curr, length = menus.length || 0, i = 0;

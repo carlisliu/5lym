@@ -11,6 +11,8 @@ define(function (require, exports, module) {
         this.elements = this.container.find('input[type="text"]');
     }
 
+    Category.PAGE_SIZE = 10;
+
     Category.prototype = {
         constructor: Category,
         saveOrUpdate: function (category) {
@@ -20,8 +22,8 @@ define(function (require, exports, module) {
             } else {
                 that = this;
                 $.ajax({
-                    type: "POST",
-                    url: "/admin/category/addOrUpdate.html",
+                    type: 'POST',
+                    url: '/admin/category/addOrUpdate.html',
                     dataType: 'json',
                     data: {category: category}
                 }).done(function (data) {
@@ -34,6 +36,18 @@ define(function (require, exports, module) {
                         that.fail('Error occurs');
                     });
             }
+            return this;
+        },
+        find: function (currentPage, pageSize, callback) {
+            if (!callback) {
+                callback = pageSize;
+                pageSize = Category.PAGE_SIZE;
+            }
+            $.getJSON('/admin/category/find.html', {current: currentPage, size: pageSize}).done(function (data) {
+                console.log(data);
+            }).fail(function (e) {
+                    console.error(e);
+                });
             return this;
         },
         success: function (category) {

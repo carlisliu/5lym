@@ -31,3 +31,7 @@ exports.saveOrUpdate = function (content, callback) {
 exports.findAllCategories = function (callback) {
     Category.find(callback);
 };
+
+exports.findCategoriesByPagination = function (currentPage, pageSize, callback) {
+    Category.find().limit(pageSize).skip(currentPage - 1).exec(callback);
+};

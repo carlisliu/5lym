@@ -2,11 +2,9 @@
  * Created by Carlis on 6/6/15.
  */
 
-var extend = require('../../util/util').extend;
-
 module.exports = function (req, res, next) {
-    res.encased = function (error, callback) {
-        var data = {};
+    res.encased = function (error, res, callback) {
+        var data = {}, args;
         if (error) {
             data.status = 'error';
             data.msg = 'Error occurs';
@@ -18,15 +16,9 @@ module.exports = function (req, res, next) {
             }
         } else {
             data.status = 'success';
-        }
-        if (typeof  callback === 'object') {
-            extend(data, callback);
-        }
-        if (typeof callback === 'function') {
-            var result = callback(data);
-            if (typeof result === 'object' && data !== result) {
-                extend(data, result);
-            }
+            args = [].slice.call(arguments, 2);
+            args.unshift(data);
+            callback && callback.apply(res, args);
         }
     };
     next();

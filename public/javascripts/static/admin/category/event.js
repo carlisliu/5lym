@@ -7,6 +7,7 @@ define(function (require, exports, module) {
 
     $(function () {
         var category = new Category('#category');
+        category.find();
         $('#category-save').click(function (e) {
             e.preventDefault();
             var categoryContent = {};
