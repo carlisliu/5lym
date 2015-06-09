@@ -1,0 +1,35 @@
+//
+   Created by Carlis on 6/9/15.
+extends layout
+    append css
+        link(rel='stylesheet', href='/stylesheets/index.css', type='text/css')
+    block content-article
+        article
+            div.bloglist
+                h2
+                    p
+            each articleItem, articleIndex in articles
+                div.blogs
+                    h3
+                        a(href='/articles/#{articleItem._id}',target="_blank", data-artilce-id='#{articleItem._id}') #{articleItem.title}
+                    if articleItem.figure
+                        figure
+                            img(src='#{articleItem.figure}')
+                        ul
+                            p !{articleItem.content}
+                            a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
+                    else
+                        ul(style="width:100%;")
+                            p #{articleItem.content}
+                            a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
+                    p.autor
+                        span 作者：#{articleItem.author_id}
+                        span 分类：【
+                            a(href='/') #{articleItem.name}
+                            | 】
+                        span 浏览(
+                            a(href='/') #{articleItem.review_times}
+                            | )
+                    div.dateview #{articleItem.create_date}
+    block content-aside
+        include side.jade
