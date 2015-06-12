@@ -36,20 +36,21 @@ html
                         _this.done++;
                         if (_this.done > 2 ) {
                             _this.thirty && setTimeout(function(){
-                                _this.innerHTML = '再戳就40啦!';
+                                _this.innerHTML = '<img src="/images/laugh.gif" />';
                                 _this.onclick = null;
                             }, 1500);
                             return false;
                         }
                         _this.innerHTML = '你';
                         setTimeout(function(){
-                            _this.innerHTML = '你30啦!';
+                            _this.innerHTML = '30啦!<img src="/images/laugh.gif" />';
                             _this.thirty = true;
                         }, 1000);
                         return false;
                     }
                     var getText = function(){
-                        var text = 'Happy birthday to #{name}!'.split(''), html = '';
+                        var text = decodeURIComponent('#{name}');
+                        text = ('Happy birthday to ' + text + '!').split(''), html = '';
                         return function(){
                             if( text && text.length) {
                                 var curr = text.shift();
