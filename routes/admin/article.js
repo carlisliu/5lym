@@ -14,10 +14,12 @@ router.get('/create.html', function (req, res) {
 
 router.post('/add.html', function (req, res) {
     var article = req.body['article'];
+    console.log(article);
     if (article) {
-        res.json({status: 'success', msg: "Article saved."})
+        res.json({status: 'success', msg: "Article saved.", article: article});
+    } else {
+        res.json({status: 'error', msg: "Article's content is empty."});
     }
-    res.json({status: 'error', msg: "Article's content is empty."})
 });
 
 module.exports = router;

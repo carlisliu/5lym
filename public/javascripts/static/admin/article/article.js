@@ -14,9 +14,9 @@ define(function (require, exports, module) {
         data: function () {
             return {};
         },
-        save: function (callback) {
+        save: function (data, callback) {
             var that = this;
-            $.post('/admin/article/add.html', {article: this.data()}).done(function (data) {
+            $.post('/admin/article/add.html', {article: data || this.data()}).done(function (data) {
                 if (data.status === 'success') {
                     that.clear();
                     that.notify(null, data.article);

@@ -31,6 +31,12 @@ html
                         div.controls
                             select.span3(name='article-category',id='article-category')
                                 option(value='') Choose
+                                each item, index in category
+                                    option(value='#{item.name}') #{item.name}
+                    div.control-group
+                        label.control-label(for='article-tag') Tag
+                        div.controls
+                            input.span6(type='text',name='article-tag',id='article-tag', placeholder='Enter tag')
                     hr
                     div(id='alerts')
                     div.btn-toolbar(data-role='editor-toolbar', data-target='#editor')
@@ -100,8 +106,8 @@ html
                         input(type='text', data-edit='inserttext', id='voiceBtn')
                     div(id='editor') Go ahead&hellip;
                     div(style='margin-top:10px;')
-                        button.btn(type='button') Save
-                        button.btn.btn-primary(type='button' style='margin-left:5px;') Save&Publish
+                        button.btn(type='button', data-action='submit', data-action-code='0') Save
+                        button.btn.btn-primary(type='button' style='margin-left:5px;', data-action='submit',data-action-code='1') Save&Publish
         script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
         script.
             (function(golbal, undefined){
@@ -111,10 +117,11 @@ html
                         'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js',
                         'hotkeys': 'sea-modules/hotkeys/0.8/hotkey.js',
                         'bootstrap': 'sea-modules/bootstrap/2.3.1/bootstrap.js',
-                        'wysiwyg': 'sea-modules/wysiwyg/bootstrap-wysiwyg.js'
+                        'wysiwyg': 'sea-modules/wysiwyg/bootstrap-wysiwyg.js',
+                        'article': 'static/admin/article/article'
                     }
                 });
-                seajs.use(['jquery', 'bootstrap', 'hotkeys', 'wysiwyg'], function($){
+                seajs.use(['jquery', 'bootstrap', 'hotkeys', 'wysiwyg', 'article'], function($, b, h, w, A){
                     $(function(){
                         function initToolbarBootstrapBindings() {
                             var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
@@ -149,7 +156,26 @@ html
                             '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
                         };
                         initToolbarBootstrapBindings();
-                        $('#editor').wysiwyg({ fileUploadError: showErrorAlert});
+                        var editor = $('#editor')
+                        editor.wysiwyg({ fileUploadError: showErrorAlert});
+
+                        $('button[data-action=submit]').click(function(e){
+                            e.preventDefault();
+                            var title = $.trim($('#article-title').val()),
+                                category = $.trim($('#article-category').val()),
+                                tag = $.trim($('#article-tag').val()),
+                                content = editor.cleanHtml(),
+                                article;
+                            if ( title && category && content) {
+                                article = {
+                                    title: title,
+                                    category: category,
+                                    content: content,
+                                    tag: tag
+                                };
+                                (new A('.container')).save(article);
+                            }
+                        });
                     });
                 });
             })(window);
