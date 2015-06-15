@@ -3,9 +3,21 @@
  */
 var express = require('express');
 var router = express.Router();
+var Article = require('../../proxy').Article;
+var Category = require('../../proxy').Category;
 
-router.get('/', function (req, res) {
-    res.render('about', { title: 'Carlis个人博客', 'contactInfo': '/images/contact-info.png'});
+router.get('/create.html', function (req, res) {
+    Category.findAllCategories(function (error, category) {
+        res.render('admin/article', {title: 'Add Article', category: category || []});
+    });
+});
+
+router.post('/add.html', function (req, res) {
+    var article = req.body['article'];
+    if (article) {
+        res.json({status: 'success', msg: "Article saved."})
+    }
+    res.json({status: 'error', msg: "Article's content is empty."})
 });
 
 module.exports = router;

@@ -76,13 +76,7 @@ block content-main
                             h4.alert-heading Information!
                             | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
                         form(action='#')
-                            div.form-group
-                                label.control-label.label-size(for='category-name') Title
-                                input.form-control(type='text',name='category-name',id='category-name',placeholder="Enter title")
-                            div.form-group
-                                label.control-label.label-size(for='category-memo') Author
-                                input.form-control(type='text',name='category-memo',id='category-memo',placeholder="Enter author")
-                            button.btn.btn-default Save
+                            button.btn.btn-default(id='create-article') Create
                             div.table-holder
                                 table.table.table-bordered
                                     thead
@@ -179,3 +173,4 @@ block script-content
             });
         });
         seajs.use('/javascripts/static/admin/category/event');
+        seajs.use('static/admin/article/event');

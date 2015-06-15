@@ -75,6 +75,20 @@ var extend = function () {
     return target;
 };
 
+var extendProps = function (target, source, props) {
+    var key;
+    if (isArray(props)) {
+        for (key in source) {
+            if (props.indexOf(key) > -1) {
+                target[key] = source[key];
+            }
+        }
+        return target;
+    }
+    return extend.apply(this, [].slice.call(arguments, 0));
+};
+
 module.exports = {
-    extend: extend
+    extend: extend,
+    extendProps: extendProps
 }
