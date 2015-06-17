@@ -7,7 +7,7 @@ define(function (require, exports, module) {
 
     $(function () {
         var category = new Category('#category');
-        category.find();
+        category.find(1);
         $('#category-save').click(function (e) {
             e.preventDefault();
             var categoryContent = {};
@@ -16,6 +16,16 @@ define(function (require, exports, module) {
                 categoryContent[$this.attr('data-key')] = $.trim($this.val());
             });
             category.saveOrUpdate(categoryContent);
+        });
+        category.container.delegate('td div button', 'click', function(e){
+            e.preventDefault();
+            console.log('click');
+            var $this = $(this);
+            if ($this.hasClass('btn-default')) {
+                //edit
+            } else {
+                category.remove($.trim($this.parents('tr').attr('id')));
+            }
         });
     });
 });

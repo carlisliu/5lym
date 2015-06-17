@@ -35,3 +35,7 @@ exports.findAllCategories = function (callback) {
 exports.findCategoriesByPagination = function (currentPage, pageSize, callback) {
     Category.find().limit(pageSize).skip(currentPage - 1).exec(callback);
 };
+
+exports.remove = function(_id, callback){
+    Category.remove({_id: _id}, callback);
+};

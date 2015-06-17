@@ -39,4 +39,18 @@ router.get('/find.html', function (req, res) {
     });
 });
 
+router.get('/remove.html', function (req, res) {
+    var _id = req.query._id;
+    if (_id) {
+        Category.remove(_id, function(error) {
+            if (error) {
+                return res.json({status: 'error', msg: 'Remove failed', error: error});
+            }
+            res.json({status: 'success'});
+        });
+    } else {
+        res.json({status: 'error', msg: "Category's id is empty"});
+    }
+});
+
 module.exports = router;

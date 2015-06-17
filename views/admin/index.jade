@@ -38,19 +38,10 @@ block content-main
                                 table.table.table-bordered
                                     thead
                                         tr
-                                            th #
-                                            th #
-                                            th #
+                                            th Category Name
+                                            th Memo
                                             th Action
                                     tbody
-                                        tr
-                                            td 1
-                                            td 1
-                                            td 1
-                                            td(width='20%')
-                                                div.btn-group.btn-group-xs
-                                                    button.btn.btn-default(type='button') Edit
-                                                    button.btn.btn-danger(type='button') Remove
                                 nav
                                     ul.pagination
                                         li
@@ -82,16 +73,16 @@ block content-main
                                 table.table.table-bordered
                                     thead
                                         tr
-                                            th #
-                                            th #
-                                            th #
+                                            th Title
+                                            th Category
+                                            th Tag
                                             th Action
                                     tbody
                                         tr
-                                            td 1
-                                            td 1
-                                            td 1
-                                            td(width='20%')
+                                            td Express - 新手指南 Express - 新手指南 Express - 新手指南 Express - 新手指南
+                                            td Nodejs
+                                            td nodejs javascript
+                                            td
                                                 div.btn-group.btn-group-xs
                                                     button.btn.btn-default(type='button') Edit
                                                     button.btn.btn-primary(type='button') Publish
@@ -142,7 +133,7 @@ block content-main
                                             td 1
                                             td 1
                                             td 1
-                                            td(width='20%')
+                                            td
                                                 div.btn-group.btn-group-xs
                                                     button.btn.btn-default(type='button') Edit
                                                     button.btn.btn-primary(type='button') Publish
@@ -164,6 +155,17 @@ block content-main
                                             a(href='#',aria-label='Next')
                                                 span(aria-hidden='true') &raquo;
 block script-content
+    script(type='x-template/category', id='category-template').
+        <tr id="{_id}">
+            <td>{name}</td>
+            <td>{memo}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-default">Edit</button>
+                    <button type="button" class="btn btn-danger">Remove</button>
+                </div>
+            </td>
+        </tr>
     script.
         seajs.use(['bootstrap', 'responsive'], function($, responsiveNav){
             $(function(){
@@ -173,5 +175,5 @@ block script-content
                 });
             });
         });
-        seajs.use('/javascripts/static/admin/category/event');
+        seajs.use('static/admin/category/event');
         seajs.use('static/admin/article/event');
