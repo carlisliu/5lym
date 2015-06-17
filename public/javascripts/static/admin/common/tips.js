@@ -11,7 +11,7 @@ define(function (require, exports, module) {
 
     Tip.LEVEL = {
         info: 'info',
-        error: 'error',
+        error: 'danger',
         success: 'success'
     };
     //show(level, msg)
@@ -21,12 +21,21 @@ define(function (require, exports, module) {
     Tip.prototype = {
         constructor: Tip,
         show: function (level, msg, callback, autoHide) {
+            var target;
             autoHide = autoHide || 500;
             if (typeof  callback !== 'function') {
                 autoHide = callback || 500;
                 callback = null;
             }
-            this.container.addClass(level);
+            target = $('<div>').addClass('alert alert-' + level).html(msg);
+            this.container.append(target);
+            if (autoHide) {
+                setTimeout(function () {
+                    target.hide(function () {
+                        target.remove();
+                    })
+                }, 3000);
+            }
             return this;
         }
     };

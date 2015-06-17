@@ -84,7 +84,10 @@ exports.saveArticle = function (article, callback) {
         instance.title = article.title;
         instance.content = article.content;
         instance.author_id = article.author_id;
+        instance.tag = article.tag;
         instance.category_id = article.category_id;
+        instance.brief = article.brief;
+        instance.classification = article.classification;
         instance.save(function (err) {
             if (err) {
                 return callback(err);
@@ -139,10 +142,10 @@ exports.updateReviewTimes = function (article, callback) {
 
 exports.findLatestArticles = function (callback) {
     // Latest article list at home page limits its size to 8.
-    Article.find().sort({'create_at': 1}).limit(8).exec(callback);
+    Article.find({classification: '1'}).sort({'create_at': -1}).limit(8).exec(callback);
 }
 
 exports.findRecommendArticles = function (callback) {
     // Same as latest articles.
-    Article.find().sort({'create_at': 1}).limit(8).exec(callback);
+    Article.find({classification: '0'}).sort({'create_at': -1}).limit(8).exec(callback);
 }

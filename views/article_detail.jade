@@ -14,7 +14,8 @@ block content-article
                 p !{article.content}
             div.keybq
                 p
-                    span 关键字词
+                    span 关键字词:
+                        span(style='color: black;') #{article.tag}
             div.nextinfo
 block content-aside
     include side.jade

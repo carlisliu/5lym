@@ -20,11 +20,11 @@ block content-article
                         figure
                             img(src='#{articleItem.figure}')
                         ul
-                            p !{articleItem.content}
+                            p #{articleItem.brief}
                             a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
                     else
                         ul(style="width:100%;")
-                            p #{articleItem.content}
+                            p #{articleItem.brief}
                             a(href='/articles/#{articleItem._id}', target="_blank", class="readmore") 阅读全文&gt;&gt;
                     p.autor
                         span 作者：#{articleItem.author_id}

@@ -34,6 +34,13 @@ html
                                 each item, index in category
                                     option(value='#{item.name}') #{item.name}
                     div.control-group
+                        label.control-label(for='article-classification') Classification
+                        div.controls
+                            select.span3(name='article-classification',id='article-classification')
+                                option(value='') Choose
+                                option(value='1') Latest
+                                option(value='0') Recommended
+                    div.control-group
                         label.control-label(for='article-tag') Tag
                         div.controls
                             input.span6(type='text',name='article-tag',id='article-tag', placeholder='Enter tag')
@@ -164,14 +171,18 @@ html
                             var title = $.trim($('#article-title').val()),
                                 category = $.trim($('#article-category').val()),
                                 tag = $.trim($('#article-tag').val()),
+                                classification = $.trim($('#article-classification').val()),
                                 content = editor.cleanHtml(),
+                                brief = $('<div>').append(content).text(),
                                 article;
                             if ( title && category && content) {
                                 article = {
                                     title: title,
                                     category: category,
                                     content: content,
-                                    tag: tag
+                                    tag: tag,
+                                    brief: brief,
+                                    classification: classification
                                 };
                                 (new A('.container')).save(article);
                             }

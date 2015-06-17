@@ -14,9 +14,21 @@ router.get('/create.html', function (req, res) {
 
 router.post('/add.html', function (req, res) {
     var article = req.body['article'];
-    console.log(article);
     if (article) {
-        res.json({status: 'success', msg: "Article saved.", article: article});
+        Article.saveArticle({
+            title: article.title,
+            content: article.content,
+            author_id: 'carlisliu',
+            tag: article.tag,
+            category_id: article.category,
+            brief: article.brief,
+            classification: article.classification
+        }, function (e) {
+            if (e) {
+                return res.json({status: 'error', msg: "Save failed.", error: e});
+            }
+            res.json({status: 'success', msg: "Article saved.", article: {title: article.title}});
+        })
     } else {
         res.json({status: 'error', msg: "Article's content is empty."});
     }

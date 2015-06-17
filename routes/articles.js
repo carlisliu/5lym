@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
                     }
                     articles[index].create_date = moment(content.create_at).format('YYYY-MM-DD');
                 });
-                var data = { title: '文章首页--刘雨萌博客' };
+                var data = { title: '文章首页--Carlis个人博客' };
                 data.articles = articles;
                 data.totalPageRecord = articles.length || 0;
                 data.paginationHtml = function (currentPage, pageSize, paginationSize, totalSize) {
@@ -109,7 +109,7 @@ router.get('/:id', function (req, res, next) {
             }
         });
         article.create_date = moment(article.create_at).format('YYYY-MM-DD');
-        res.render('article_detail', {article: article, title: (article.title || '') + '-刘雨萌博客', me: Common.getCommonData().me});
+        res.render('article_detail', {article: article, title: (article.title || '') + '-Carlis个人博客', me: Common.getCommonData().me});
     });
 });
 

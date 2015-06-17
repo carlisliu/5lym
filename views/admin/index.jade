@@ -21,10 +21,11 @@ block content-main
                     div.box-head
                         h3='Category'
                     div.box-content
-                        div.alert.alert-info.alert-block(id='category-tip-container')
+                        div(id='category-tip-container')
+                        div.alert.alert-info.alert-block
                             a.close(data-dismiss='alert',href='#') x
                             h4.alert-heading Information!
-                            | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                            | The part is for category, add article's category by specifying its name.
                         form(action='#', id='category-form')
                             div.form-group
                                 label.control-label.label-size(for='category-name') Category
@@ -74,7 +75,7 @@ block content-main
                         div.alert.alert-info.alert-block
                             a.close(data-dismiss='alert',href='#') x
                             h4.alert-heading Information!
-                            | The input-elements have square corners. Of course the bootstrap rounded-corners style is also available!
+                            | Add an article by clicking the `Create` button, manage articles from the grid.
                         form(action='#')
                             button.btn.btn-default(id='create-article') Create
                             div.table-holder

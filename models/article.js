@@ -8,13 +8,15 @@ var mongoose = require('mongoose'),
 var ArticleSchema = new Schema({
     title: {type: String},
     content: {type: String},
+    brief: {type: String},
+    classification: {type: String, default: '1'},
     tag: {type: String},
     review_times: {type: Number, default: 0},
     category_id: {type: String},
     author_id: { type: String},
     create_at: {type: Date, default: Date.now},
     update_at: {type: Date},
-    update_by: { type: String}
+    update_by: {type: String}
 });
 
 mongoose.model('Article', ArticleSchema);
