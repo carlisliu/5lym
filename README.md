@@ -12,9 +12,9 @@ How to use this project:
 
 3. Find or create a directory, like `Github`
      run command:
-	cd Github
-	git clone https://github.com/carlisliu/5lym.git
-	cd 5lym
-	npm install
-	npm start
+	cd Github;
+	git clone https://github.com/carlisliu/5lym.git;
+	cd 5lym;
+	npm install;
+	npm start;
 4. enjoy!
