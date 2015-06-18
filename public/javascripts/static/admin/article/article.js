@@ -74,8 +74,10 @@ define(function (require, exports, module) {
                     html += util.format(template, content);
                 });
                 if (html) {
-                    this.container.find('table tbody').append(html);
+                    this.container.find('table tbody').empty().append(html);
                 }
+            } else {
+                this.container.find('table tbody').empty().append('<tr><td colspan="4">No Article</td></tr>');
             }
             return this;
         },
