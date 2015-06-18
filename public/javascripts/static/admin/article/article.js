@@ -4,12 +4,12 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
         Tip = require('../common/tips'),
-        tip = new Tip(''),
+        tip = new Tip('#article-tip-container'),
         util = require('util');
 
     function Article(container, editor) {
         this.container = $(container);
-        this.template = $.trim($().html());
+        this.template = $.trim($('#article-template').html());
         this.editor = $(editor);
     }
 
@@ -32,13 +32,13 @@ define(function (require, exports, module) {
                 });
             return this;
         },
-        publish: function (id) {
-            $.getJSON('/admin/article/publish.html', {_id: id}).done(function (data) {
+        publish: function (id, published) {
+            $.getJSON('/admin/article/publish.html', {_id: id, published: !!published}).done(function (data) {
                 if (data.status === 'success') {
-                    tip.showSuccess('Published.');
+                    tip.showSuccess(data.msg);
                 }
             }).fail(function (e) {
-                    tip.showError('Publish failed.');
+                    tip.showError(data.msg);
                 });
             return this;
         },
@@ -62,14 +62,19 @@ define(function (require, exports, module) {
             return this;
         },
         render: function (articles) {
-            var html = '', template, that = this;
+            var html = '', template;
             if (articles) {
                 template = this.template;
                 $(articles).each(function (index, content) {
+                    if (content.published) {
+                        content.status = 'UnPublish';
+                    } else {
+                        content.status = 'Publish';
+                    }
                     html += util.format(template, content);
                 });
                 if (html) {
-                    that.container.find('table tbody').append(html);
+                    this.container.find('table tbody').append(html);
                 }
             }
             return this;

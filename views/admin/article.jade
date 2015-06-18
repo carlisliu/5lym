@@ -113,7 +113,7 @@ html
                         input(type='text', data-edit='inserttext', id='voiceBtn')
                     div(id='editor') Go ahead&hellip;
                     div(style='margin-top:10px;')
-                        button.btn(type='button', data-action='submit', data-action-code='0') Save
+                        button.btn(type='button', data-action='submit') Save
                         button.btn.btn-primary(type='button' style='margin-left:5px;', data-action='submit',data-action-code='1') Save&Publish
         script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
         script.
@@ -174,6 +174,7 @@ html
                                 classification = $.trim($('#article-classification').val()),
                                 content = editor.cleanHtml(),
                                 brief = $('<div>').append(content).text(),
+                                published = $(this).attr('data-action-code') ? true : false,
                                 article;
                             if ( title && category && content) {
                                 article = {
@@ -182,7 +183,8 @@ html
                                     content: content,
                                     tag: tag,
                                     brief: brief,
-                                    classification: classification
+                                    classification: classification,
+                                    published: published
                                 };
                                 (new A('.container')).save(article);
                             }

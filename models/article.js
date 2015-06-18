@@ -11,6 +11,7 @@ var ArticleSchema = new Schema({
     brief: {type: String},
     classification: {type: String, default: '1'},
     tag: {type: String},
+    published: {type: Boolean, default: false},
     review_times: {type: Number, default: 0},
     category_id: {type: String},
     author_id: { type: String},

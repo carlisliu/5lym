@@ -63,6 +63,7 @@ block content-main
                     div.box-head
                         h3='Articles'
                     div.box-content
+                        div(id='article-tip-container')
                         div.alert.alert-info.alert-block
                             a.close(data-dismiss='alert',href='#') x
                             h4.alert-heading Information!
@@ -78,15 +79,6 @@ block content-main
                                             th Tag
                                             th Action
                                     tbody
-                                        tr
-                                            td Express - 新手指南 Express - 新手指南 Express - 新手指南 Express - 新手指南
-                                            td Nodejs
-                                            td nodejs javascript
-                                            td
-                                                div.btn-group.btn-group-xs
-                                                    button.btn.btn-default(type='button') Edit
-                                                    button.btn.btn-primary(type='button') Publish
-                                                    button.btn.btn-danger(type='button') Remove
                                 nav
                                     ul.pagination
                                         li
@@ -162,6 +154,19 @@ block script-content
             <td>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-default">Edit</button>
+                    <button type="button" class="btn btn-danger">Remove</button>
+                </div>
+            </td>
+        </tr>
+    script(type='x-template/article', id='article-template').
+        <tr id="{_id}">
+            <td>{title}</td>
+            <td>{category_id}</td>
+            <td>{tag}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-default">Edit</button>
+                    <button type="button" class="btn btn-primary" data-publish="{published}">{status}</button>
                     <button type="button" class="btn btn-danger">Remove</button>
                 </div>
             </td>

@@ -14,13 +14,19 @@ define(function (require, exports, module) {
 
         article.container.delegate('table button', 'click', function (e) {
             e.preventDefault();
-            var $this = $(this);
-            if ($this.hasClass('btn-info')) {
-
+            var $this = $(this), published;
+            if ($this.hasClass('btn-primary')) {
+                published = $this.attr('data-publish');
+                if (published == 'true') {
+                    published = false;
+                } else {
+                    published = true;
+                }
+                article.publish($.trim($this.parents('tr').attr('id')), published);
             } else if ($this.hasClass('btn-danger')) {
-                article.remove($.trim($this.attr('id')));
+                article.remove($.trim($this.parents('tr').attr('id')));
             } else {
-
+                //edit
             }
         });
 

@@ -4,7 +4,7 @@ var Article = require('../models').Article,
     EventProxy = require('eventproxy');
 
 exports.getAllArticles = function (callback) {
-    Article.find().sort({'create_at': -1}).exec(function (err, articles) {
+    Article.find({published: true}).sort({'create_at': -1}).exec(function (err, articles) {
         if (err) {
             return callback(err);
         }
@@ -46,7 +46,7 @@ exports.getArticleCount = function (callback) {
 };
 
 exports.pagination = function (currentPage, pageSize, callback) {
-    Article.find().sort({'create_at': -1}).skip((currentPage - 1) * pageSize).limit(pageSize).exec(function (err, articles) {
+    Article.find({published: true}).sort({'create_at': -1}).skip((currentPage - 1) * pageSize).limit(pageSize).exec(function (err, articles) {
         var proxy = new EventProxy();
         proxy.assign('user_found', function (users) {
             var foundUsers = {};
@@ -66,6 +66,10 @@ exports.pagination = function (currentPage, pageSize, callback) {
         });
         User.getUsersByIds(ids, proxy.done('user_found'));
     });
+}
+
+exports.findByPagination = function (currentPage, pageSize, callback) {
+    Article.find().sort({'create_at': -1}).skip((currentPage - 1) * pageSize).limit(pageSize).exec(callback);
 }
 
 exports.getArticleById = function (id, callback) {
@@ -88,6 +92,7 @@ exports.saveArticle = function (article, callback) {
         instance.category_id = article.category_id;
         instance.brief = article.brief;
         instance.classification = article.classification;
+        instance.published = article.published;
         instance.save(function (err) {
             if (err) {
                 return callback(err);
@@ -106,14 +111,14 @@ exports.getAdjacentArticles = function (date, callback) {
         callback(null, pre, after);
     });
 
-    Article.find({'create_at': {'$lt': date}}).sort({'create_at': -1}).exec(function (err, articles) {
+    Article.find({'create_at': {'$lt': date}, published: true}).sort({'create_at': -1}).exec(function (err, articles) {
         var data = null, article = null;
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
         proxy.done('pre_found')(null, data);
     });
-    Article.find({'create_at': {'$gt': date}}).sort({'create_at': 1}).exec(function (err, articles) {
+    Article.find({'create_at': {'$gt': date}, published: true}).sort({'create_at': 1}).exec(function (err, articles) {
         var data = null, article = null;
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
@@ -142,10 +147,18 @@ exports.updateReviewTimes = function (article, callback) {
 
 exports.findLatestArticles = function (callback) {
     // Latest article list at home page limits its size to 8.
-    Article.find({classification: '1'}).sort({'create_at': -1}).limit(8).exec(callback);
+    Article.find({classification: '1', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
 }
 
 exports.findRecommendArticles = function (callback) {
     // Same as latest articles.
-    Article.find({classification: '0'}).sort({'create_at': -1}).limit(8).exec(callback);
+    Article.find({classification: '0', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
+}
+
+exports.remove = function (id, callback) {
+    Article.remove({_id: id}, callback);
+}
+
+exports.publish = function (id, published, callback) {
+    Article.update({_id: id}, {$set: {published: published}}, callback);
 }
