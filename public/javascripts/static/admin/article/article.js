@@ -2,10 +2,14 @@
  * Created by Carlis on 6/15/15.
  */
 define(function (require, exports, module) {
-    var $ = require('jquery');
+    var $ = require('jquery'),
+        Tip = require('../common/tips'),
+        tip = new Tip(''),
+        util = require('util');
 
     function Article(container, editor) {
         this.container = $(container);
+        this.template = $.trim($().html());
         this.editor = $(editor);
     }
 
@@ -26,6 +30,48 @@ define(function (require, exports, module) {
             }).fail(function (e) {
                     that.notify(e, null);
                 });
+            return this;
+        },
+        publish: function (id) {
+            $.getJSON('/admin/article/publish.html', {_id: id}).done(function (data) {
+                if (data.status === 'success') {
+                    tip.showSuccess('Published.');
+                }
+            }).fail(function (e) {
+                    tip.showError('Publish failed.');
+                });
+            return this;
+        },
+        remove: function (id) {
+            $.getJSON('/admin/article/remove.html', {_id: id}).done(function (data) {
+                if (data.status === 'success') {
+                    tip.showSuccess('Removed.');
+                }
+            }).fail(function (e) {
+                    tip.showError('Remove failed.');
+                });
+            return this;
+        },
+        find: function (currentPage, pageSize) {
+            var that = this;
+            $.getJSON('/admin/article/find.html', {current: currentPage, size: pageSize}).done(function (data) {
+                that.render(data.article);
+            }).fail(function (e) {
+                    console.error(e);
+                });
+            return this;
+        },
+        render: function (articles) {
+            var html = '', template, that = this;
+            if (articles) {
+                template = this.template;
+                $(articles).each(function (index, content) {
+                    html += util.format(template, content);
+                });
+                if (html) {
+                    that.container.find('table tbody').append(html);
+                }
+            }
             return this;
         },
         clear: function () {
