@@ -4,6 +4,12 @@
 
 var Article = require('../models').Article;
 
-exports.findArticlesByTagName = function (tag, callback) {
-    Article.find({tag: tag}, callback);
+exports.findArticlesByTagName = function (_tag, callback) {
+    Article.find().$where(function () {
+        console.log(this.tag);
+        if (this.tag) {
+            return true;
+        }
+        return false;
+    }).exec(callback);
 };

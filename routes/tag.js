@@ -24,10 +24,12 @@ router.get('/:tag', function (req, res, next) {
         return next();
     }
     Tag.findArticlesByTagName(tag.toLowerCase(), function (error, articles) {
+        console.log(articles);
+        console.log('111111111111111111111');
         if (error || !articles || !articles.length) {
             next();
         } else {
-            res.render('', {articles: articles});
+            res.render('article_index', {articles: articles});
         }
     });
 });
