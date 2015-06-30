@@ -8,6 +8,7 @@ var routes = require('./routes');
 var adminRoutes = require('./admin-routes');
 var config = require('./config');
 var encased = require('./routes/util/encased');
+var me = require('./me.js');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.set('view engine', 'jade');
 
 app.use(function (req, res, next) {
     res.locals.title = config.title;
+    res.locals.me = me;
     next();
 });
 
@@ -24,7 +26,7 @@ app.use(function (req, res, next) {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

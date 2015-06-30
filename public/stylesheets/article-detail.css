@@ -4,7 +4,7 @@
 .box_c { border: #ccc 1px dashed; text-align: center; padding: 5px 0; margin-right: 30px;color: #999;}
 .box_c span { margin: 0 10px; }
 .box_c span a{color: #099;}
-ul.infos { overflow: hidden; margin: 20px 30px 20px 0; line-height: 28px; font-size: 14px; text-indent: 2em;color:#666 }
+ul.infos { overflow: hidden; margin: 20px 30px 20px 0; padding: 0px 10px; line-height: 28px; font-size: 14px; text-indent: 2em;color:#666 }
 ul.infos p { margin: 10px; }
 ul.infos p img { display: block; margin: auto }
 .keybq { background: url(../images/6264.png) no-repeat 10px center #F8F8F8; line-height: 30px; height: 30px; padding-left: 40px; border: 1px solid #F0F0F0; margin-right: 20px; }
