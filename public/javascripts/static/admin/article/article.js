@@ -62,20 +62,17 @@ define(function (require, exports, module) {
             return this;
         },
         render: function (articles) {
-            var html = '', template;
-            if (articles) {
-                template = this.template;
-                $(articles).each(function (index, content) {
-                    if (content.published) {
-                        content.status = 'UnPublish';
-                    } else {
-                        content.status = 'Publish';
-                    }
-                    html += util.format(template, content);
-                });
-                if (html) {
-                    this.container.find('table tbody').append(html);
+            var html = '', template = this.template;
+            $(articles).each(function (index, content) {
+                if (content.published) {
+                    content.status = 'UnPublish';
+                } else {
+                    content.status = 'Publish';
                 }
+                html += util.format(template, content);
+            });
+            if (html) {
+                this.container.find('table tbody').append(html);
             }
             return this;
         },
