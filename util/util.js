@@ -8,7 +8,7 @@ var isArray = Array.isArray || function (obj) {
 // Borrow from jQuery, change a little bit.
 var isPlainObject = function (obj) {
     var key, hasOwn = ({}).hasOwnProperty;
-    //Because this method is used in server side, so remove browse-related code.
+    //Because this method is used in server side, so remove browser-related code.
     //By Carlis [2015-06-06]
     // Not own constructor property must be Object
     if (obj.constructor && !hasOwn.call(obj, "constructor") && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
