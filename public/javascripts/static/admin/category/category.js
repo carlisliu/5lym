@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     var $ = require('jquery'),
         Tip = require('../common/tips'),
-        util = require('util')
+        util = require('util'),
         tip = new Tip('#category-tip-container');
 
     function Category(container) {
@@ -60,7 +60,6 @@ define(function (require, exports, module) {
             currentPage = currentPage || 1;
             pageSize = pageSize || Category.PAGE_SIZE;
             $.getJSON('/admin/category/find.html', {current: currentPage, size: pageSize}).done(function (data) {
-                console.log(data);
                 that.render(data.category);
             }).fail(function (e) {
                     console.error(e);

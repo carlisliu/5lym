@@ -43,8 +43,10 @@ define(function (require, exports, module) {
             return this;
         },
         remove: function (id) {
+            var that = this;
             $.getJSON('/admin/article/remove.html', {_id: id}).done(function (data) {
                 if (data.status === 'success') {
+                    that.container.find('tr[id=' + id + ']').remove();
                     tip.showSuccess('Removed.');
                 }
             }).fail(function (e) {
