@@ -3,10 +3,12 @@
  */
 var index = require('./routes/admin/index.js'),
     category = require('./routes/admin/category.js'),
-    article = require('./routes/admin/article.js');
+    article = require('./routes/admin/article.js'),
+    upload = require('./routes/admin/upload.js');
 
 module.exports = function (app) {
     app.use('/admin', index);
     app.use('/admin/category', category);
     app.use('/admin/article', article);
+    app.use('/admin/upload', upload);
 };

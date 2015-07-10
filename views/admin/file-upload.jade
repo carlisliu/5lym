@@ -1,0 +1,28 @@
+//
+   Created by Carlis on 7/10/15.
+
+doctype html
+html
+    head
+        title= title
+        meta(charset='utf-8')
+        meta(name='keywords', content="刘雨萌,刘雨萌的博客,Carlis,Carlis个人博客,个人博客,博客")
+        meta(name='description', content="Carlis个人博客")
+        meta(name='viewport', content="width=device-width, minimum-scale=1.0, maximum-scale=1.0")
+        script(src='/javascripts/sea-modules/seajs/seajs/3.0.0/sea.js')
+        script.
+            (function(golbal, undefined){
+                seajs.config({
+                    base: '/javascripts/',
+                    alias: {
+                        'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js'
+                    }
+                });
+                golbal.seajs = seajs;
+            })(window);
+    body
+        h1='File Uoload Page'
+        form(action='/upload/image', method="post", enctype="multipart/form-data" )
+            input(type="file", id="file-upload", name="file-upload")
+            br
+            button(type="submit", id="upload-file", name="upload-fil") upload
