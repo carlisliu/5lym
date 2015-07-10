@@ -16,7 +16,6 @@ router.post('/image', function (req, res, next) {
     //change temp directory.
     form.uploadDir = "./public/upload/temp/";
     form.parse(req, function (error, fields, files) {
-        console.log(files);
         for (var key in files) {
             var file = files[key];
             var fName = (new Date()).getTime();
@@ -31,7 +30,6 @@ router.post('/image', function (req, res, next) {
                     fName = fName + ".png";
                     break;
             }
-            console.log(file.size);
             var uploadDir = "./public/upload/" + fName;
             fs.rename(file.path, uploadDir, function (err) {
                 if (err) {
