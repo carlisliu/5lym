@@ -22,7 +22,33 @@ html
             })(window);
     body
         h1='File Uoload Page'
-        form(action='/upload/image', method="post", enctype="multipart/form-data" )
+        form(action='/admin/upload/image', method="post", enctype="multipart/form-data" )
             input(type="file", id="file-upload", name="file-upload")
             br
-            button(type="submit", id="upload-file", name="upload-fil") upload
+            button(type="submit", id="upload-file", name="upload-file") upload
+            br
+            input(type="file", id="file-upload-ajax", name="file-upload-ajax")
+            button(type="submit", id="upload-file-ajax", name="upload-file-ajax") ajaxUpload
+        script.
+            (function(){
+                seajs.use('jquery', function($){
+                    $('#upload-file-ajax').click(function(){
+                        var data = new FormData();
+                        var files = $('#file-upload-ajax')[0].files;
+                        if (files) {
+                            data.append('file', files[0]);
+                        }
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            url: '/admin/upload/image',
+                            data: data,
+                            contentType: false,
+                            processData: false
+                        }).done(function(data){
+                            console.log('uploaded');
+                        });
+                        return false;
+                    });
+                });
+            })();

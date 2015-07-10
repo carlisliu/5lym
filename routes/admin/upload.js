@@ -8,17 +8,14 @@ var formidable = require('formidable');
 var fs = require('fs');
 
 router.get('/', function (req, res, next) {
-    res.render('/admin/file-upload');
+    res.render('admin/file-upload');
 });
 
 router.post('/image', function (req, res, next) {
-    //res.end('resource found');
     var form = new formidable.IncomingForm();
     //change temp directory.
     form.uploadDir = "./public/upload/temp/";
     form.parse(req, function (error, fields, files) {
-        console.error(error);
-        console.log(fields);
         console.log(files);
         for (var key in files) {
             var file = files[key];
