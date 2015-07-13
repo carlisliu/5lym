@@ -11,7 +11,8 @@ block content-article
             h2 About job
             ul
                 p  对现在的工作少了一份激情，感兴趣的朋友可以点击
-                    a(title='简历下载', href='/download/resume', target='_blank') 【简历下载】
+                    -var url = '/download/resume?_r=' + new Date().getTime();
+                    a(title='简历下载', href='#{url}', target='_blank') 【简历下载】
                     | ,非诚勿扰。
             h2 About me
             ul
