@@ -13,6 +13,7 @@ var config = {
         paginationSize: 5
     },
     title: "Carlis Liu's blog",
-    catchphrase: 'Chance favors only the prepared mind'
+    catchphrase: 'Chance favors only the prepared mind',
+    verification: '874u73ef109mf03mc9'
 };
 module.exports = config;
