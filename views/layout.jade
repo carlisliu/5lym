@@ -60,7 +60,7 @@ html
             p
                 a(href='http://www.miitbeian.gov.cn/', target='_blank') 京ICP备15029116号
         script.
-            (function () {
+            (function (seajs, undefined) {
                 var menus = document.getElementById('topnav').getElementsByTagName('a'), curr, length = menus.length || 0, i = 0;
                 for (; i < length; i++) {
                     if (window.location.href.indexOf(menus[i].href) > -1 || (window.location.href + '.html').indexOf(menus[i].href) > -1) {
@@ -68,13 +68,11 @@ html
                     }
                 }
                 curr && (curr.id = 'topnav_current');
-            })();
-            (function(){
                 seajs.use('jquery', function($){
                     $(function(){
                         // baidu share
                         window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
                     });
                 });
-            })();
+            })(seajs);
         block script-content
