@@ -6,3 +6,4 @@ exports.Article = require('./article');
 exports.Category = require('./category');
 exports.Common = require('./common');
 exports.Tag = require('./tag');
+exports.Birthday = require('./birthday');

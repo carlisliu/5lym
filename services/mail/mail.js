@@ -5,6 +5,7 @@
 var nodeMailer = require('nodemailer');
 var config = require('../../config');
 var sender = config.sender;
+var Birthday = require('../../proxy').Birthday;
 
 var transporter = nodeMailer.createTransport({
     //service: 'QQ',
@@ -17,18 +18,31 @@ var transporter = nodeMailer.createTransport({
     }
 });
 
-var mailOptions = {
-    from: 'Kris<' + sender.account + '>', // sender address
-    to: 'admin@live.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world ✔', // plaintext body
-    html: '<b>Hello world ✔</b>' // html body
+exports.mail = function(){
+    Birthday.find(function (err, birthdays) {
+        if (err) {
+            return console.log(err);
+        }
+        for (var i = 0, length = birthdays.length; i < length; i++) {
+            (function (i) {
+                var bDay = birthdays[i];
+                var mailOptions = {
+                    from: 'Kris<' + sender.account + '>', // sender address
+                    to: bDay['e_mail'], // list of receivers
+                    cc: sender.cc,
+                    subject: bDay['subject'], // Subject line Hello ✔
+                    text: bDay['text'], // plaintext body
+                    html: bDay['html'] // html body
+                };
+                transporter.sendMail(mailOptions, function (err, info) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Message sent: ' + info.response);
+                    }
+                });
+            })(i);
+        }
+    });
 };
 
-transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log('Message sent: ' + info.response);
-    }
-});
