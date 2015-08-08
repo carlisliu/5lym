@@ -27,7 +27,7 @@ module.exports = function () {
             (function (i) {
                 var bDay = birthdays[i];
                 var mailOptions = {
-                    from: 'Kris<' + sender.account + '>', // sender address
+                    from: sender.title.replace(/\{(\w+)\}/, sender.account), // sender address
                     to: bDay['e_mail'], // list of receivers
                     cc: sender.cc,
                     subject: bDay['subject'], // Subject line Hello ✔
