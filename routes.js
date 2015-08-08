@@ -10,7 +10,8 @@ var routes = require('./routes/index.js'),
     articles = require('./routes/articles.js'),
     download = require('./routes/download.js'),
     birthday = require('./routes/birthday.js'),
-    tag = require('./routes/tag.js');
+    tag = require('./routes/tag.js'),
+    love = require('./routes/love.js');
 
 module.exports = function (app) {
     app.use('/', routes);
@@ -24,4 +25,5 @@ module.exports = function (app) {
     app.use('/download/resume', download);
     app.use('/happy-birthday-to-:format?', birthday);
     app.use('/tag', tag);
+    app.use('/love.html', love);
 };
