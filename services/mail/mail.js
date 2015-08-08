@@ -10,14 +10,14 @@ var transporter = nodeMailer.createTransport({
     host: 'smtp.126.com',
     secure: true,
     auth: {
-        user: 'light8220@126.com',
-        pass: 'woai056166'
+        user: 'admin@5lym.com',
+        pass: 'admin'
     }
 });
 
 var mailOptions = {
-    from: 'Kris<' + 'light8220@126.com' + '>', // sender address
-    to: 'carlisliu@live.com', // list of receivers
+    from: 'Kris<' + 'admin@5lym.co' + '>', // sender address
+    to: 'admin@live.com', // list of receivers
     subject: 'Hello ✔', // Subject line
     text: 'Hello world ✔', // plaintext body
     html: '<b>Hello world ✔</b>' // html body
