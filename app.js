@@ -13,6 +13,7 @@ var fs = require('fs');
 var morgan = require('morgan');
 var app = express();
 var errorHandler = require('errorhandler');
+require('./services')();
 
 var accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'});
 var errorLogStream = fs.createWriteStream(__dirname + '/logs/error.log', {flags: 'a'});

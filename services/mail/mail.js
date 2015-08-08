@@ -18,7 +18,7 @@ var transporter = nodeMailer.createTransport({
     }
 });
 
-exports.mail = function(){
+module.exports = function () {
     Birthday.find(function (err, birthdays) {
         if (err) {
             return console.log(err);
@@ -34,11 +34,12 @@ exports.mail = function(){
                     text: bDay['text'], // plaintext body
                     html: bDay['html'] // html body
                 };
+                console.log('got ' + bDay.name.first + "'s mail, sending now...");
                 transporter.sendMail(mailOptions, function (err, info) {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log('Message sent: ' + info.response);
+                        console.log('Message for ' + bDay.name.first + ' sent: ' + info.response);
                     }
                 });
             })(i);

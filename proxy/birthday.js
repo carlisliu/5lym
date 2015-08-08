@@ -3,4 +3,6 @@
  */
 var Birthday = require('../models').Birthday;
 
-exports.find = Birthday.find;
+exports.find = function(callback){
+    Birthday.find(callback);
+};

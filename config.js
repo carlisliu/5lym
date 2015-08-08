@@ -20,6 +20,7 @@ var config = {
         cc: 'admin@qq.com',
         account: 'admin@126.com',
         pass: 'admin'
-    }
+    },
+    schedule: 'active'
 };
 module.exports = config;

@@ -3,9 +3,12 @@
  */
 
 var schedule = require('node-schedule');
-var nodeMailer = require('nodemailer');
 var mail = require('../mail/mail');
 var rule = new schedule.RecurrenceRule();
-rule.hour = 9;
-rule.minute = 0;
-schedule.scheduleJob(rule, mail);
+rule.hour = 20;
+rule.minute = 3;
+module.exports = function(){
+    console.log('Sending mail schedule started.');
+    schedule.scheduleJob(rule, mail);
+    console.log('Sending mail schedule finished.');
+};
