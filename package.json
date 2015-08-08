@@ -18,6 +18,8 @@
     "mongoose": "^4.0.5",
     "formidable": "^1.0.17",
     "nodemailer": "^1.4.0",
-    "node-schedule": "^0.2.9"
+    "node-schedule": "^0.2.9",
+    "crypto": "0.0.3",
+    "errorhandler": "^1.4.2"
   }
 }
