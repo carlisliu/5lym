@@ -18,9 +18,11 @@ require('./user');
 require('./comments');
 require('./share');
 require('./category');
+require('./birthday');
 
 exports.Article = mongoose.model('Article');
 exports.User = mongoose.model('User');
 exports.Comments = mongoose.model('Comments');
 exports.Share = mongoose.model('Share');
 exports.Category = mongoose.model('Category');
+exports.Birthday = mongoose.model('Birthday');
