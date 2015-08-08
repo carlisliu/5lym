@@ -11,11 +11,11 @@ How to use this project:
 2. Make sure you have installed MongoDB on your machine.
 
 3. Find or create a directory, like `Github`
-    run command:
-      cd Github;
-      git clone https://github.com/carlisliu/5lym.git;
-      cd 5lym;
-      npm install;
-      npm start;
-      
+    run command:   
+      cd Github;   
+      git clone https://github.com/carlisliu/5lym.git;   
+      cd 5lym;   
+      npm install;   
+      npm start;   
+
 4. enjoy!
