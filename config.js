@@ -14,6 +14,10 @@ var config = {
     },
     title: "Carlis Liu's blog",
     catchphrase: 'Chance favors only the prepared mind',
-    verification: '5lym'
+    verification: '5lym',
+    sender: {
+        account: 'admin@126.com',
+        pass: 'admin'
+    }
 };
 module.exports = config;

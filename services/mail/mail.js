@@ -3,6 +3,8 @@
  */
 
 var nodeMailer = require('nodemailer');
+var config = require('../../config');
+var sender = config.sender;
 
 var transporter = nodeMailer.createTransport({
     //service: 'QQ',
@@ -10,13 +12,13 @@ var transporter = nodeMailer.createTransport({
     host: 'smtp.126.com',
     secure: true,
     auth: {
-        user: 'admin@5lym.com',
-        pass: 'admin'
+        user: sender.account,
+        pass: sender.pass
     }
 });
 
 var mailOptions = {
-    from: 'Kris<' + 'admin@5lym.co' + '>', // sender address
+    from: 'Kris<' + sender.account + '>', // sender address
     to: 'admin@live.com', // list of receivers
     subject: 'Hello ✔', // Subject line
     text: 'Hello world ✔', // plaintext body
