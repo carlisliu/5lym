@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dynamic Statement Mapping DTD.
+
+<!DOCTYPE dynamic-statement PUBLIC 
+    "-//5lym/Dynamic Statement DTD 1.0//EN"
+    "http://www.5lym.com/dtd/dynamic-statement-1.0.dtd">
+-->
+
+<!--
+	The document root.
+ -->
+
+<!ELEMENT dynamic-statement (
+	(query)*
+)>
+							<!-- default: none -->
+
+<!-- The query element declares a named query string -->
+
+<!ELEMENT query (#PCDATA)>
+	<!ATTLIST query name CDATA #REQUIRED>
