@@ -8,7 +8,8 @@ var express = require('express'),
     Category = require('../proxy').Category,
     moment = require('moment'),
     config = require('../config'),
-    Common = require('../proxy').Common;
+    Common = require('../proxy').Common,
+    markdown = require('markdown').markdown;
 
 /*Articles Home Page*/
 router.get('/', function (req, res, next) {
@@ -109,6 +110,7 @@ router.get('/:id', function (req, res, next) {
             }
         });
         article.create_date = moment(article.create_at).format('YYYY-MM-DD');
+        article.content = markdown.toHTML(article.content);
         res.render('article_detail', {article: article, title: (article.title || '') + '-Carlis个人博客', me: Common.getCommonData().me});
     });
 });

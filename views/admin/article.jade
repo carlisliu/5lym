@@ -46,72 +46,7 @@ html
                             input.span6(type='text',name='article-tag',id='article-tag', placeholder='Enter tag')
                     hr
                     div(id='alerts')
-                    div.btn-toolbar(data-role='editor-toolbar', data-target='#editor')
-                        div.btn-group
-                            a.btn.dropdown-toggle(data-toggle='dropdown', title='Font')
-                                i.icon-font
-                                b.caret
-                            ul.dropdown-menu
-                        div.btn-group
-                            a.btn.dropdown-toggle(data-toggle='dropdown', title='Font Size')
-                                i.icon-text-height
-                                b.caret
-                            ul.dropdown-menu
-                                li
-                                    a(data-edit='fontSize 5')
-                                        font(size='5') Huge
-                                li
-                                    a(data-edit='fontSize 3')
-                                        font(size='3') Normal
-                                li
-                                    a(data-edit='fontSize 1')
-                                        font(size='1') Small
-                        div.btn-group
-                            a.btn(data-edit='bold', title='Bold (Ctrl/Cmd+B)')
-                                i.icon-bold
-                            a.btn(data-edit='italic', title='Italic (Ctrl/Cmd+I)')
-                                i.icon-italic
-                            a.btn(data-edit='strikethrough', title='Strikethrough')
-                                i.icon-strikethrough
-                            a.btn(data-edit='underline', title='Underline (Ctrl/Cmd+U)')
-                                i.icon-underline
-                        div.btn-group
-                            a.btn(data-edit='insertunorderedlist', title='Bullet list')
-                                i.icon-list-ul
-                            a.btn(data-edit='insertorderedlist', title='Number list')
-                                i.icon-list-ol
-                            a.btn(data-edit='outdent', title='Reduce indent (Shift+Tab)')
-                                i.icon-indent-left
-                            a.btn(data-edit='indent', title='Indent (Tab)')
-                                i.icon-indent-right
-                        div.btn-group
-                            a.btn(data-edit='justifyleft', title='Align Left (Ctrl/Cmd+L)')
-                                i.icon-align-left
-                            a.btn(data-edit='justifycenter', title='Center (Ctrl/Cmd+E)')
-                                i.icon-align-center
-                            a.btn(data-edit='justifyright', title='Align Right (Ctrl/Cmd+R)')
-                                i.icon-align-right
-                            a.btn(data-edit='justifyfull', title='Justify (Ctrl/Cmd+J)')
-                                i.icon-align-justify
-                        div.btn-group
-                            a.btn.dropdown-toggle(data-toggle='dropdown', title='Hyperlink')
-                                i.icon-link
-                            div.dropdown-menu.input-append
-                                input.span2(placeholder='URL', type='text', data-edit='createLink')
-                                button.btn(type='button') Add
-                            a.btn(data-edit='unlink', title='Remove Hyperlink')
-                                i.icon-cut
-                        div.btn-group
-                            a.btn(title='Insert picture (or just drag & drop)', id='pictureBtn')
-                                i.icon-picture
-                            input(type='file', data-role='magic-overlay', data-target='#pictureBtn', data-edit='insertImage')
-                        div.btn-group
-                            a.btn(data-edit='undo', title='Undo (Ctrl/Cmd+Z)')
-                                i.icon-undo
-                            a.btn(data-edit='redo', title='Redo (Ctrl/Cmd+Y)')
-                                i.icon-repeat
-                        input(type='text', data-edit='inserttext', id='voiceBtn')
-                    div(id='editor')
+                    textarea(id='editor',style="width:100%;")
                     div(style='margin-top:10px;')
                         button.btn(type='button', data-action='submit') Save
                         button.btn.btn-primary(type='button' style='margin-left:5px;', data-action='submit',data-action-code='1') Save&Publish
@@ -122,63 +57,26 @@ html
                     base: '/javascripts/',
                     alias: {
                         'jquery': 'sea-modules/jquery/jquery/1.10.1/jquery.js',
-                        'hotkeys': 'sea-modules/hotkeys/0.8/hotkey.js',
                         'bootstrap': 'sea-modules/bootstrap/2.3.1/bootstrap.js',
-                        'wysiwyg': 'sea-modules/wysiwyg/bootstrap-wysiwyg.js',
                         'article': 'static/admin/article/article',
                         'util': 'static/common/util'
                     }
                 });
-                seajs.use(['jquery', 'bootstrap', 'hotkeys', 'wysiwyg', 'article'], function($, b, h, w, A){
+                seajs.use(['jquery', 'bootstrap', 'article'], function($, b, A){
                     $(function(){
-                        function initToolbarBootstrapBindings() {
-                            var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-                                'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
-                                'Times New Roman', 'Verdana'],
-                                fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-                            $.each(fonts, function (idx, fontName) {
-                                fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
-                            });
-                            $('a[title]').tooltip({container:'body'});
-                            $('.dropdown-menu input').click(function() {return false;})
-                                .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
-                            .keydown('esc', function () {this.value='';$(this).change();});
-                            $('[data-role=magic-overlay]').each(function () {
-                                var overlay = $(this), target = $(overlay.data('target'));
-                                overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-                            });
-                            if ("onwebkitspeechchange"  in document.createElement("input")) {
-                                var editorOffset = $('#editor').offset();
-                                $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
-                            } else {
-                                $('#voiceBtn').hide();
-                            }
-                        }
-                        function showErrorAlert (reason, detail) {
-                            var msg = '';
-                            if (reason === 'unsupported-file-type') { msg = "Unsupported format " +detail; }
-                            else {
-                                console.log("error uploading file", reason, detail);
-                            }
-                            $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
-                            '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
-                        };
-                        initToolbarBootstrapBindings();
-                        var editor = $('#editor')
-                        editor.wysiwyg({ fileUploadError: showErrorAlert});
-
                         $('button[data-action=submit]').click(function(e){
                             e.preventDefault();
                             var title = $.trim($('#article-title').val()),
                                 category = $.trim($('#article-category').val()),
                                 tag = $.trim($('#article-tag').val()),
                                 classification = $.trim($('#article-classification').val()),
-                                content = editor.cleanHtml(),
+                                editor = $('#editor');
+                                content = editor.val(),
                                 brief = $('<div>').append(content).text(),
                                 published = $(this).attr('data-action-code') ? true : false,
                                 article;
                             if ( title && category && content) {
-                                article = {
+                                var article = {
                                     title: title,
                                     category: category,
                                     content: content,

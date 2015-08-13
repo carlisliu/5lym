@@ -10,7 +10,7 @@ block content-article
                 span.d_time 发布时间： #{article.create_date}
                 span 编辑：
                     a(href='mailto:carlisliu@qq.com') #{article.author_id}
-            ul.infos
+            div.article-content
                 p !{article.content}
             div.keybq
                 p
@@ -29,7 +29,7 @@ block script-content
         </p>
     script.
         (function(){
-            seajs.use('jquery', function($){
+            seajs.use(['jquery'], function($){
                 $(function(){
                     $.getJSON('/articles/get/adjacent.html', {id: '#{article._id}'}, function(data){
                         var html = '';

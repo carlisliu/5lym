@@ -51,6 +51,7 @@ router.get('/publish.html', function (req, res) {
 
 router.post('/add.html', function (req, res) {
     var article = req.body['article'];
+    console.log(article);
     if (article) {
         Article.saveArticle({
             title: article.title,
