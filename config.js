@@ -16,10 +16,10 @@ var config = {
     catchphrase: 'Chance favors only the prepared mind',
     verification: '5lym',
     sender: {
-        title: '刘雨萌（Carlis Liu)<{account}>',
+        title: '刘雨萌_Carlis Liu<{account}>',
         cc: 'admin@qq.com',
         account: 'admin@126.com',
-        pass: 'admin'
+        pass: 'admin@126.com'
     },
     schedule: 'active'
 };
