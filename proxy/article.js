@@ -116,14 +116,14 @@ exports.getAdjacentArticles = function (date, callback) {
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
-        proxy.done('pre_found')(null, data);
+        proxy.emit('pre_found', data);
     });
     Article.find({'create_at': {'$gt': date}, published: true}).sort({'create_at': 1}).exec(function (err, articles) {
         var data = null, article = null;
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
-        proxy.done('after_found')(null, data);
+        proxy.emit('after_found', data);
     });
 };
 
