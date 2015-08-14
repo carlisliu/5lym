@@ -157,11 +157,11 @@ router.post('/add', function (req, res, next) {
                 category_id: '1',
                 author_id: user.login_name
             }, function (err, article) {
-                console.log(article);
                 if (err) {
                     res.end('Saved Error: ' + title);
+                } else {
+                    res.send('保存成功 ' + article.title);
                 }
-                res.send('保存成功 ' + article.title);
             });
         });
     } else {
