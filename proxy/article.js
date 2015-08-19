@@ -39,10 +39,10 @@ exports.getAllArticles = function (callback) {
 exports.getArticleCount = function (callback) {
     Article.count(function (err, count) {
         if (err) {
-            callback(err, null);
+            return callback(err, null);
         }
         callback(null, count);
-    })
+    });
 };
 
 exports.pagination = function (currentPage, pageSize, callback) {
@@ -111,20 +111,21 @@ exports.getAdjacentArticles = function (date, callback) {
         callback(null, pre, after);
     });
 
-    Article.find({'create_at': {'$lt': date}, published: true}).sort({'create_at': -1}).exec(function (err, articles) {
+    Article.find({'create_at': {'$lt': date}, published: true}).sort({'create_at': -1}).exec(proxy.done('pre_found', function (articles) {
         var data = null, article = null;
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
-        proxy.emit('pre_found', data);
-    });
-    Article.find({'create_at': {'$gt': date}, published: true}).sort({'create_at': 1}).exec(function (err, articles) {
+        return data;
+    }));
+
+    Article.find({'create_at': {'$gt': date}, published: true}).sort({'create_at': 1}).exec(proxy.done('after_found', function (articles) {
         var data = null, article = null;
         if (articles && (article = articles[0])) {
             data = {'link': '/articles/' + article._id, 'title': article.title};
         }
-        proxy.emit('after_found', data);
-    });
+        return data;
+    }));
 };
 
 exports.updateReviewTimes = function (article, callback) {
@@ -136,9 +137,10 @@ exports.updateReviewTimes = function (article, callback) {
     var updateProperty = {
         review_times: article.review_times,
         update_at: article.update_at
-    }
+    };
     Article.update({_id: article._id}, {$set: updateProperty}, function (err) {
         if (err) {
+            console.error(err);
             return callback(err, null);
         }
         callback(null, article);
