@@ -16,9 +16,6 @@ router.get('/', function (req, res, next) {
             articles = articles.slice(0, 5);
         }
         articles && articles.forEach(function (content, index) {
-            if (!index) {
-                articles[index].figure = '/figures/007.jpg';
-            }
             if (content.content && content.content.length > 400) {
                 articles[index].content = content.content.substring(0, 400) + '...';
             }
