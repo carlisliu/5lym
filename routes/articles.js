@@ -23,9 +23,6 @@ router.get('/', function (req, res, next) {
                 res.render('redirect', {title: '模块正在建设中..'});
             } else {
                 articles && articles.forEach(function (content, index) {
-                    if (!index) {
-                        articles[index].figure = '/figures/007.jpg';
-                    }
                     if (content.content && content.content.length > 400) {
                         articles[index].content = content.content.substring(0, 400) + '...';
                     }
@@ -106,7 +103,7 @@ router.get('/:id', function (req, res, next) {
             if (err) {
                 console.log("error occurs when update article's review times.");
             } else {
-                console.log('article has been updated, review times is ' + updArticle.review_times);
+                console.log('article has been updated.');
             }
         });
         article.create_date = moment(article.create_at).format('YYYY-MM-DD');
