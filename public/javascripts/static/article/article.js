@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     var $ = require('jquery');
 
     function Article() {
-        this.template = '<li><a href="{href}">{title}</a></li>';
+        this.template = '<li><a href="{href}" title="{title}">{title}</a></li>';
     }
 
     Article.prototype = {
