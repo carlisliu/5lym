@@ -4,7 +4,7 @@
 
 var config = {
 //    db: 'mongodb://{username}:{password}@127.0.0.1/carlis_blog_prod',
-    db: 'mongodb://127.0.0.1/carlis_blog_prod',
+    db: 'mongodb://192.168.12.57/carlis_blog_prod',
     db_name: 'carlis_blog_prod',
     username: 'root',
     password: 'root',
