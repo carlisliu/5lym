@@ -66,11 +66,11 @@ exports.pagination = function (currentPage, pageSize, callback) {
         });
         User.getUsersByIds(ids, proxy.done('user_found'));
     });
-}
+};
 
 exports.findByPagination = function (currentPage, pageSize, callback) {
     Article.find().sort({'create_at': -1}).skip((currentPage - 1) * pageSize).limit(pageSize).exec(callback);
-}
+};
 
 exports.getArticleById = function (id, callback) {
     Article.findOne({_id: id}, function (err, article) {
@@ -100,7 +100,7 @@ exports.saveArticle = function (article, callback) {
             return callback(null, instance);
         });
     }
-}
+};
 
 exports.getAdjacentArticles = function (date, callback) {
     if (!date) {
@@ -150,17 +150,17 @@ exports.updateReviewTimes = function (article, callback) {
 exports.findLatestArticles = function (callback) {
     // Latest article list at home page limits its size to 8.
     Article.find({classification: '1', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
-}
+};
 
 exports.findRecommendArticles = function (callback) {
     // Same as latest articles.
     Article.find({classification: '0', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
-}
+};
 
 exports.remove = function (id, callback) {
     Article.remove({_id: id}, callback);
-}
+};
 
 exports.publish = function (id, published, callback) {
     Article.update({_id: id}, {$set: {published: published}}, callback);
-}
+};

@@ -14,6 +14,11 @@ var config = {
     },
     title: "Carlis Liu's blog",
     catchphrase: 'Chance favors only the prepared mind',
-    verification: '5lym'
+    verification: '5lym',
+    redis: {
+        host: '127.0.0.1',
+        port: 2212,
+        password: ''
+    }
 };
 module.exports = config;
