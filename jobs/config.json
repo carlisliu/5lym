@@ -1,0 +1,6 @@
+{
+  "cache": {
+    "active": false,
+    "cron": "*/15 * * * * *"
+  }
+}

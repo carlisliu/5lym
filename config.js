@@ -4,7 +4,7 @@
 
 var config = {
 //    db: 'mongodb://{username}:{password}@127.0.0.1/carlis_blog_prod',
-    db: 'mongodb://192.168.12.57/carlis_blog_prod',
+    db: 'mongodb://127.0.0.1/carlis_blog_prod',
     db_name: 'carlis_blog_prod',
     username: 'root',
     password: 'root',
@@ -14,13 +14,6 @@ var config = {
     },
     title: "Carlis Liu's blog",
     catchphrase: 'Chance favors only the prepared mind',
-    verification: '5lym',
-    sender: {
-        title: '刘雨萌_Carlis Liu<{account}>',
-        cc: 'admin@qq.com',
-        account: 'admin@126.com',
-        pass: 'admin@126.com'
-    },
-    schedule: 'active'
+    verification: '5lym'
 };
 module.exports = config;
