@@ -2,5 +2,9 @@
   "cache": {
     "active": false,
     "cron": "*/15 * * * * *"
+  },
+  "birthday": {
+    "active": false,
+    "cron": "*/15 * * * * *"
   }
 }
