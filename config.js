@@ -17,8 +17,8 @@ var config = {
     verification: '5lym',
     redis: {
         host: '127.0.0.1',
-        port: 2212,
-        password: ''
+        port: 6379,
+        auth_pass: ''
     }
 };
 module.exports = config;
