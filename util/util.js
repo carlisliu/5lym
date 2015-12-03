@@ -19,7 +19,7 @@ var isPlainObject = function (obj) {
     for (key in obj) {
     }
     return key === undefined || hasOwn.call(obj, key);
-}
+};
 // Borrow from jQuery, change a little bit.
 var extend = function () {
     var src, copyIsArray, copy, name, options, clone,
@@ -91,4 +91,4 @@ var extendProps = function (target, source, props) {
 module.exports = {
     extend: extend,
     extendProps: extendProps
-}
+};

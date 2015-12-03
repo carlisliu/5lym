@@ -10,4 +10,4 @@ module.exports = {
         user: 'admin@126.com',
         pass: 'admin@126.com'
     }
-}
+};
