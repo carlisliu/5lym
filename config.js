@@ -12,7 +12,7 @@ var config = {
         pageSize: 10,
         paginationSize: 5
     },
-    title: "Carlis Liu's blog",
+    title: "Carlis个人博客",
     catchphrase: 'Chance favors only the prepared mind',
     verification: '5lym',
     redis: {
