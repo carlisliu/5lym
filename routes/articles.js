@@ -9,6 +9,7 @@ var express = require('express'),
     moment = require('moment'),
     config = require('../config'),
     Common = require('../proxy').Common,
+    status = require('./util/status'),
     markdown = require('markdown').markdown;
 
 /*Articles Home Page*/
@@ -168,29 +169,19 @@ router.post('/add', function (req, res, next) {
 
 router.get('/get/latest.html', function (req, res, next) {
     Article.findLatestArticles(function (error, articles) {
-        var data = {};
         if (error) {
-            data.status = 'error';
-            //data.msg = error.toString();
-        } else {
-            data.status = 'success';
-            data.articles = articles;
+            return res.ep.emit('error', error);
         }
-        res.json(data);
+        res.json(status.status({articles: articles}));
     })
 });
 
 router.get('/get/recommend.html', function (req, res, next) {
     Article.findRecommendArticles(function (error, articles) {
-        var data = {};
         if (error) {
-            data.status = 'error';
-            //data.msg = error.toString();
-        } else {
-            data.status = 'success';
-            data.articles = articles;
+            return res.ep.emit('error', error);
         }
-        res.json(data);
+        res.json(status.status({articles: articles}));
     })
 });
 
