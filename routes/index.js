@@ -7,9 +7,8 @@ var Common = require('../proxy').Common;
 /* GET home page. */
 router.get('/', function (req, res, next) {
     Article.getAllArticles(function (err, articles) {
-        var data = { title: 'Carlis个人博客' };
         if (err) {
-            data.error = '查找文章失败';
+            articles = [];
         }
         // get the latest five articles
         if (articles && articles.length > 5) {
@@ -21,9 +20,7 @@ router.get('/', function (req, res, next) {
             }
             articles[index].create_date = moment(content.create_at).format('YYYY-MM-DD');
         });
-        data.articles = articles;
-        data.me = Common.getCommonData().me;
-        res.render('index', data);
+        res.render('index', {articles: articles});
     });
 });
 
