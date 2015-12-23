@@ -13,7 +13,7 @@ var express = require('express'),
     markdown = require('markdown').markdown;
 
 /*Articles Home Page*/
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     var currentPage = req.query.page || 1, pageSize = config.page.pageSize, paginationSize = config.page.paginationSize;
     Article.getArticleCount(function (err, count) {
         if (currentPage * pageSize > count) {
@@ -81,7 +81,7 @@ router.get('/', function (req, res, next) {
                         categoryMap[content._id] = content.name;
                     });
                     var articles = data.articles || [];
-                    articles.forEach(function (content, index) {
+                    articles.forEach(function (content) {
                         content.name = categoryMap[content.category_id] || '未分类';
                     });
                     data.me = Common.getCommonData().me;
@@ -100,7 +100,7 @@ router.get('/:id', function (req, res, next) {
         if (!article) {
             return next();
         }
-        Article.updateReviewTimes(article, function (err, updArticle) {
+        Article.updateReviewTimes(article, function (err) {
             if (err) {
                 console.log("error occurs when update article's review times.");
             } else {
@@ -113,7 +113,7 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
-router.get('/get/adjacent.html', function (req, res, next) {
+router.get('/get/adjacent.html', function (req, res) {
     var articleId = req.query['id'];
     if (!articleId) {
         res.json({'test': 'Carlis Liu'});
@@ -138,11 +138,11 @@ router.get('/get/adjacent.html', function (req, res, next) {
     });
 });
 
-router.get('/admin/create', function (req, res, next) {
+router.get('/admin/create', function (req, res) {
     res.render('create_article');
 });
 
-router.post('/add', function (req, res, next) {
+router.post('/add', function (req, res) {
     var title, content;
     title = req.body['title'];
     content = req.body['content'];
@@ -167,7 +167,7 @@ router.post('/add', function (req, res, next) {
     }
 });
 
-router.get('/get/latest.html', function (req, res, next) {
+router.get('/get/latest.html', function (req, res) {
     Article.findLatestArticles(function (error, articles) {
         if (error) {
             return res.ep.emit('error', error);
@@ -176,7 +176,7 @@ router.get('/get/latest.html', function (req, res, next) {
     })
 });
 
-router.get('/get/recommend.html', function (req, res, next) {
+router.get('/get/recommend.html', function (req, res) {
     Article.findRecommendArticles(function (error, articles) {
         if (error) {
             return res.ep.emit('error', error);
