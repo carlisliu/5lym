@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 
 router.post('/verification.html', function (req, res, next) {
     var identification = req.body.identification;
-    if (!identification || identification !== config.verification) {
+    if (identification !== config.verification) {
         next();
     } else {
         res.render('admin/index', { title: '后台管理-Carlis个人博客'});

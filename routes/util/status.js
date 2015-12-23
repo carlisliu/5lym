@@ -23,19 +23,18 @@ exports.status = function (status, msg, data) {
     if (!length) {
         return exports.defaultStatus;
     } else if (length === 1) {
-        if (typeof msg === 'string'){
-            msg = status;
-        } else {
+        if (typeof status !== 'string'){
             data = status;
+            status = null;
         }
     } else if (length === 2) {
         if (typeof  msg === 'object') {
             data = msg;
-            msg = status;
+            msg = null;
         }
     }
     var result = {
-        status: 'success',
+        status: status || 'success',
         msg: msg || ''
     };
     if (data) {

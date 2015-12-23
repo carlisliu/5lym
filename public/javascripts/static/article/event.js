@@ -9,19 +9,10 @@ define(function (require, exports, module) {
 
     $(function () {
         var article = new Article();
-        article.getLatestArticles(function (error, data) {
-            var articleContent = '';
-            if (error) {
-                articleContent = util.format(article.template, {href: '#', title: '无'})
-            } else {
-                $(data.articles).each(function (index, content) {
-                    articleContent += util.format(article.template, {title: content.title, href: '/articles/' + content._id});
-                });
-            }
-            if (articleContent) {
-                $('#article-latest').html(articleContent);
-            }
-        }).getRecommendArticles(function (error, data) {
+        article.getLatestArticles(render('#article-latest')).getRecommendArticles(render('#article-recommend'));
+
+        function render(holder) {
+            return function(error, data){
                 var articleContent = '';
                 if (error) {
                     articleContent = util.format(article.template, {href: '#', title: '无'})
@@ -30,9 +21,8 @@ define(function (require, exports, module) {
                         articleContent += util.format(article.template, {title: content.title, href: '/articles/' + content._id});
                     });
                 }
-                if (articleContent) {
-                    $('#article-recommend').html(articleContent);
-                }
-            });
+                articleContent && $(holder).html(articleContent);
+            }
+        }
     });
 });

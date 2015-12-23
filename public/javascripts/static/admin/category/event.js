@@ -19,7 +19,6 @@ define(function (require, exports, module) {
         });
         category.container.delegate('td div button', 'click', function(e){
             e.preventDefault();
-            console.log('click');
             var $this = $(this);
             if ($this.hasClass('btn-default')) {
                 //edit

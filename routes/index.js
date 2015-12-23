@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Article = require('../proxy').Article;
 var moment = require('moment');
-var Common = require('../proxy').Common;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

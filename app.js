@@ -25,53 +25,46 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./setting'));
+app.use(require('./routes/util/register-event'));
 
-var eventRegister = require('./routes/util/register-event');
-app.use(eventRegister);
-
-var routes = require('./routes');
-var adminRoutes = require('./admin-routes');
 //routes
-routes(app);
-adminRoutes(app);
+require('./routes')(app);
+require('./admin-routes')(app);
 
-app.use(errorHandler({log: function(err, str, req){
+app.use(errorHandler({log: function (err, str, req) {
     console.error('error captured.');
-    var meta = '[' + new Date() + '] ' + 'Error in ' + req.method + req.url + '\n' ;
+    var meta = '[' + new Date() + '] ' + 'Error in ' + req.method + req.url + '\n';
     errorLogStream.write(meta + err.stack + '\n');
 }}));
 
-// development error handler, will print stacktrace
+/// catch 404 and forwarding to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
 if (app.get('env') === 'development') {
-    // catch 404 and forward to error handler
-    app.use(function (req, res, next) {
-        var err = new Error('Not Found');
-        err.status = 404;
-        next(err);
-    });
-    app.use(function (err, req, res) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err,
-            stack: err.stack
-        });
-    });
-} else {
-    // catch 404 and forward to error handler
-    app.use(function (req, res) {
-        var err = new Error('Not Found');
-        err.status = 404;
-        res.render('404', {
-            message: err.message,
-            error: {},
-            title: 'No page available'
+            error: err
         });
     });
 }
 
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
+
 process.on('uncaughtException', function (err) {
-    console.error('error captured.');
     errorLogStream.write(err.stack + '\n');
     process.exit(1);
 });

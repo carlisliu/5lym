@@ -1,7 +1,43 @@
 var Article = require('../models').Article,
     User = require('./user'),
     Category = require('./category'),
-    EventProxy = require('eventproxy');
+    EventProxy = require('eventproxy'),
+    util = require('../util/util');
+
+exports.find = Article.find;
+
+exports.getIndexArticles = function (limit, callback) {
+    Article.find({published: true}, {limit: limit}).sort({'create_at': -1}).exec(function (err, articles) {
+        if (err) {
+            return callback(err);
+        }
+        var proxy = new EventProxy();
+        proxy.assign('user_found', 'category_found', function (users, categories) {
+            var foundUsers = {}, foundCategories = {};
+            if (users && users.length) {
+                users.forEach(function (user) {
+                    foundUsers[user.login_name] = user.name;
+                });
+            }
+            if (categories && categories.length) {
+                categories.forEach(function (content) {
+                    foundCategories[content._id] = content.name;
+                });
+            }
+            articles && articles.forEach(function (article) {
+                article.author_id = foundUsers[article.author_id] || '';
+                article.name = foundCategories[article.category_id] || '未分类';
+            });
+            callback(null, articles);
+        });
+        var ids = [];
+        articles.forEach(function (article) {
+            ids.push(article.author_id);
+        });
+        User.getUsersByIds(ids, proxy.done('user_found'));
+        Category.findAllCategories(proxy.done('category_found'));
+    });
+};
 
 exports.getAllArticles = function (callback) {
     Article.find({published: true}).sort({'create_at': -1}).exec(function (err, articles) {
@@ -84,15 +120,7 @@ exports.getArticleById = function (id, callback) {
 exports.saveArticle = function (article, callback) {
     var instance;
     if (article) {
-        instance = new Article();
-        instance.title = article.title;
-        instance.content = article.content;
-        instance.author_id = article.author_id;
-        instance.tag = article.tag;
-        instance.category_id = article.category_id;
-        instance.brief = article.brief;
-        instance.classification = article.classification;
-        instance.published = article.published;
+        instance = util.extend(new Article(), article);
         instance.save(function (err) {
             if (err) {
                 return callback(err);
@@ -147,15 +175,14 @@ exports.updateReviewTimes = function (article, callback) {
     });
 };
 
-exports.findLatestArticles = function (callback) {
-    // Latest article list at home page limits its size to 8.
-    Article.find({classification: '1', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
-};
+function findClassification(cf) {
+    return function (callback) {
+        Article.find({classification: cf, published: true}).sort({'create_at': -1}).limit(8).exec(callback);
+    };
+}
 
-exports.findRecommendArticles = function (callback) {
-    // Same as latest articles.
-    Article.find({classification: '0', published: true}).sort({'create_at': -1}).limit(8).exec(callback);
-};
+exports.findLatestArticles = findClassification('1');
+exports.findRecommendArticles = findClassification('0');
 
 exports.remove = function (id, callback) {
     Article.remove({_id: id}, callback);
