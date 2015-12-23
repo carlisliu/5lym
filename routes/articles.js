@@ -98,7 +98,7 @@ router.get('/:id', function (req, res, next) {
     var articleId = req.params['id'];
     Article.getArticleById(articleId, function (err, article) {
         if (!article) {
-            next();
+            return next();
         }
         Article.updateReviewTimes(article, function (err, updArticle) {
             if (err) {
