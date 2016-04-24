@@ -1,72 +1,40 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var app = express();
+var app = require('koa')()
+  , koa = require('koa-router')()
+  , logger = require('koa-logger')
+  , json = require('koa-json')
+  , views = require('koa-views')
+  , onerror = require('koa-onerror');
 
-var errorHandler = require('errorhandler');
-var fs = require('fs');
-var accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'});
-var errorLogStream = fs.createWriteStream(__dirname + '/logs/error.log', {flags: 'a'});
-app.use(logger('combined', {stream: accessLogStream}));
+var index = require('./routes/index');
+var users = require('./routes/users');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// global middlewares
+app.use(views('views', {
+  root: __dirname + '/views',
+  default: 'ejs'
+}));
+app.use(require('koa-bodyparser')());
+app.use(json());
+app.use(logger());
 
-// favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(require('./setting'));
-app.use(require('./routes/util/register-event'));
-
-//routes
-require('./routes')(app);
-require('./admin-routes')(app);
-
-app.use(errorHandler({log: function (err, str, req) {
-    console.error('error captured.');
-    var meta = '[' + new Date() + '] ' + 'Error in ' + req.method + req.url + '\n';
-    errorLogStream.write(meta + err.stack + '\n');
-}}));
-
-/// catch 404 and forwarding to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use(function *(next){
+  var start = new Date;
+  yield next;
+  var ms = new Date - start;
+  console.log('%s %s - %s', this.method, this.url, ms);
 });
 
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+app.use(require('koa-static')(__dirname + '/public'));
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+// routes definition
+koa.use('/', index.routes(), index.allowedMethods());
+koa.use('/users', users.routes(), users.allowedMethods());
 
-process.on('uncaughtException', function (err) {
-    errorLogStream.write(err.stack + '\n');
-    process.exit(1);
+// mount root routes  
+app.use(koa.routes());
+
+app.on('error', function(err, ctx){
+  log.error('server error', err, ctx);
 });
 
 module.exports = app;
